@@ -33,8 +33,12 @@ export default class ChatApp extends React.Component {
   }
 
   render() {
-    return (<div>
-      <h3>Welcome to the chat. You're chatting with <Name name={this.state.name} /></h3>
+    return (<div
+      style={{
+        height: '100%',
+      }}
+    >
+      <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
       <Messages messages={this.state.messages}/>
       <NewMessage handleResult={this.handleNewMessage} />
       {/* Make styles available to children */}
@@ -42,6 +46,14 @@ export default class ChatApp extends React.Component {
         .messages-container {
           width: 80%;
           list-style-type: none;
+          padding-bottom: 50px;
+        }
+
+        .new-message {
+          position: fixed;
+          border-top: 1px solid #000;
+          bottom: 0;
+          height: 50px;
         }
       `}</style>
     </div>);

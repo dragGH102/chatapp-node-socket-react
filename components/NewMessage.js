@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 
-const NewMessage = ({ handleResult }) => (<form onSubmit={handleResult}>
-
+const NewMessage = ({ handleResult }) => (<form
+  className="new-message"
+  onSubmit={handleResult}
+>
+  Some content
 </form>);
 
 NewMessage.propTypes = {

@@ -1,4 +1,4 @@
-import * as MessageType from '../types/Message';
+import MessageType from '../types/Message';
 
 const Message = ({ message }) => (<div>
   <span
@@ -34,6 +34,7 @@ const Message = ({ message }) => (<div>
 </div>);
 
 Message.propTypes = {
-
+  message: MessageType.isRequired,
 };
+
 export default Message;
