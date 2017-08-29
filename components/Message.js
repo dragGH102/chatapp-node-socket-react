@@ -38,6 +38,6 @@ Message.propTypes = {
     author: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     css: PropTypes.string,
-  }),
+  }).isRequired,
 };
 export default Message;

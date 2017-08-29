@@ -12,6 +12,7 @@ const Messages  = ({ messages }) => (<ul className="messages-container">
 
 Messages.props = {
   name: PropTypes.string.isRequired,
+  messages: PropTypes.
 };
 
 export default Messages;

@@ -21,13 +21,21 @@ export default class ChatApp extends React.Component {
         css: null,
         id: new Date().getUTCMilliseconds() + 1,
       }],
-    }
+    };
+
+    // provide context to bindings
+    this.handleNewMessage.bind(this);
+  }
+
+  handleNewMessage() {
+    // TODO
   }
 
   render() {
     return (<div>
       <h3>Welcome to the chat. You're chatting with <Name name={this.state.name} /></h3>
       <Messages messages={this.state.messages}/>
+      <NewMessage handleResult={this.handleNewMessage} />
       {/* Make styles available to children */}
       <style jsx global>{`
         .messages-container {
