@@ -21,7 +21,7 @@ const Message = ({ message }) => (<div>
     .message.mine {
       float: right;
       text-align: right;
-      background-color: #90EE90:
+      background-color: #98FB98;
     }
 
     .message.other {
