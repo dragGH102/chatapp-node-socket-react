@@ -9,25 +9,33 @@ class NewMessage extends React.Component {
     };
 
     // provide context to bindings
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange(e) {
+    this.setState({
+      message: e.target.value,
+    });
+  }
 
+  isValidMessage
+
+  handleSubmit(e) {
+    const { handleResult } = this.props;
+  }
 
   render() {
-    const { handleResult } = this.props;
 
     return (<form
       className="new-message"
-      onSubmit={handleResult}
+      onSubmit={handleSubmit}
     >
       <input
         value={this.state.message}
         placeholder="Type a new message..."
+        onChange={this.handleChange}
       />
-      <button
-        type="submit"
-        value="Send"
-      />
+      <button type="submit">Send</button>
     </form>);
 
   }

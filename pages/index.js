@@ -54,7 +54,8 @@ export default class ChatApp extends React.Component {
           border-top: 1px solid #000;
           bottom: 0;
           height: 50px;
-          width: 100%;
+          padding-top: 15px;
+          width: 96%;
           clear: both;
         }
 
@@ -67,10 +68,9 @@ export default class ChatApp extends React.Component {
 
           .new-message button {
             display: block;
-            height: 20px;
+            line-height: 20px;
             width: 20%;
             float: right;
-            margin-right: 5%;
           }
       `}</style>
     </div>);
