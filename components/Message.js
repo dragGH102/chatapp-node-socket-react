@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types';
 
 const Message = ({ message }) => (<div>
-  <span className={`message ${message.author === 'me' ? 'mine' : 'other'}`}>{message.content}</span>
+  <span
+    className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
+    style={message.css}
+  >
+    {message.content}
+  </span>
   <style jsx>{`
     .message {
-      width: 40;
+      width: 40%;
     }
 
     .message.mine {
@@ -14,9 +19,6 @@ const Message = ({ message }) => (<div>
     .message.other {
       float: left;
     }
-
-    // additional styling
-    ${message.css}
   `
   }</style>
 </div>);
@@ -28,3 +30,4 @@ Message.propTypes = {
     css: PropTypes.string,
   }),
 };
+export default Message;

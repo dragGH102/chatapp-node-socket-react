@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const WithError = ({ children, error }) => (<div>
   {children}
   <div className="error">{error}</div>

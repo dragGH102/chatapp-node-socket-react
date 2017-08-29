@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import WithError from '../wrappers/WithError';
 import Message from '../components/Message';
 
-const Messages  = ({ messages }) => (<ul>
+const Messages  = ({ messages }) => (<ul className="messages-container">
   {messages.map((message) => <li key={message.id}>
     <WithError>
       <Message message={message} />
@@ -10,7 +10,7 @@ const Messages  = ({ messages }) => (<ul>
   </li>)}
 </ul>);
 
-Name.props = {
+Messages.props = {
   name: PropTypes.string.isRequired,
 };
 
