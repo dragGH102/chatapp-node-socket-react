@@ -33,7 +33,6 @@ export default class ChatApp extends React.Component {
         .messages-container {
           width: 80%;
           list-style-type: none;
-          position: relative;
         }
       `}</style>
     </div>);

@@ -10,16 +10,24 @@ const Message = ({ message }) => (<div>
   <style jsx>{`
     .message {
       width: 40%;
-      position: absolute;
-      display: block;
+      clear: both;
+      border: 1px solid #000;
+      border-radius: 5px;
+      height: 1.5em;
+      font-size: 1em;
+      padding: 2px 10px;
     }
 
     .message.mine {
-      right: 0;
+      float: right;
+      text-align: right;
+      background-color: #90EE90:
     }
 
     .message.other {
-      left: 0;
+      float: left;
+      text-align: left;
+      background-color: #D3D3D3;
     }
   `
   }</style>
