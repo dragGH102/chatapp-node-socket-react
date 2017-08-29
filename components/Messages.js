@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import WithError from '../wrappers/WithError';
-import * as React from 'react';
+import Message from '../components/Message';
 
 const Messages  = ({ messages }) => (<ul>
-  {messages.map((message) => <li>
+  {messages.map((message) => <li key={message.id}>
     <WithError>
-      <Message message={message}
+      <Message message={message} />
     </WithError>
   </li>)}
 </ul>);

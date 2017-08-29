@@ -1,5 +1,5 @@
-const WithError = ({ error }) => (<div>
-  <Child />
+const WithError = ({ children, error }) => (<div>
+  {children}
   <div className="error">{error}</div>
 
   <style jsx>{`
