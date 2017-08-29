@@ -1,5 +1,6 @@
 import Name from '../components/Name';
 import Messages from '../components/Messages';
+import NewMessage from '../components/NewMessage';
 
 export default class ChatApp extends React.Component {
   constructor() {

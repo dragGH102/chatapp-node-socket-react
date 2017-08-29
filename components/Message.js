@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import * as MessageType from '../types/Message';
 
 const Message = ({ message }) => (<div>
   <span
@@ -34,10 +34,6 @@ const Message = ({ message }) => (<div>
 </div>);
 
 Message.propTypes = {
-  message: PropTypes.shape({
-    author: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    css: PropTypes.string,
-  }).isRequired,
+
 };
 export default Message;
