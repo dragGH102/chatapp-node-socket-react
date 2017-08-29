@@ -54,7 +54,24 @@ export default class ChatApp extends React.Component {
           border-top: 1px solid #000;
           bottom: 0;
           height: 50px;
+          width: 100%;
+          clear: both;
         }
+
+         .new-message input {
+            display: block;
+            width: 70%;
+            height: 20px;
+            float: left;
+          }
+
+          .new-message button {
+            display: block;
+            height: 20px;
+            width: 20%;
+            float: right;
+            margin-right: 5%;
+          }
       `}</style>
     </div>);
   }

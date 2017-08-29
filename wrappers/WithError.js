@@ -13,6 +13,11 @@ const WithError = ({ children, error }) => (<div>
 
 WithError.propTypes = {
   error: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+WithError.defaultProps = {
+  error: null,
 };
 
 export default WithError;

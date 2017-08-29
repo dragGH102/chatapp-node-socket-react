@@ -9,11 +9,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/bundles/pages/index.js" afterPath="$PROJECT_DIR$/.next/bundles/pages/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/dist/pages/index.js" afterPath="$PROJECT_DIR$/.next/dist/pages/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.next/manifest.js" afterPath="$PROJECT_DIR$/.next/manifest.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/Message.js" afterPath="$PROJECT_DIR$/components/Message.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/Messages.js" afterPath="$PROJECT_DIR$/components/Messages.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/NewMessage.js" afterPath="$PROJECT_DIR$/components/NewMessage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/index.js" afterPath="$PROJECT_DIR$/pages/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/Message.js" afterPath="$PROJECT_DIR$/types/Message.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrappers/WithError.js" afterPath="$PROJECT_DIR$/wrappers/WithError.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="53" column="37" lean-forward="false" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
+            <state relative-caret-position="527">
+              <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -65,8 +63,8 @@
       <file leaf-file-name="NewMessage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/NewMessage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+            <state relative-caret-position="391">
+              <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -84,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Message.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Message.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/types/Message.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+            <state relative-caret-position="136">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -162,15 +160,15 @@
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/components/Name.js" />
-        <option value="$PROJECT_DIR$/wrappers/WithError.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.eslintrc.js" />
         <option value="$PROJECT_DIR$/components/iMessage.js" />
-        <option value="$PROJECT_DIR$/components/NewMessage.js" />
-        <option value="$PROJECT_DIR$/pages/index.js" />
         <option value="$PROJECT_DIR$/components/Message.js" />
         <option value="$PROJECT_DIR$/components/Messages.js" />
         <option value="$PROJECT_DIR$/types/Message.js" />
+        <option value="$PROJECT_DIR$/wrappers/WithError.js" />
+        <option value="$PROJECT_DIR$/components/NewMessage.js" />
+        <option value="$PROJECT_DIR$/pages/index.js" />
       </list>
     </option>
   </component>
@@ -404,12 +402,12 @@
       <updated>1503942176457</updated>
       <workItem from="1503942177762" duration="614000" />
       <workItem from="1503994933356" duration="846000" />
-      <workItem from="1504009684132" duration="6259000" />
+      <workItem from="1504009684132" duration="6882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7719000" />
+    <option name="totallyTimeSpent" value="8342000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="0" width="1450" height="1080" extended-state="0" />
@@ -488,14 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrappers/WithError.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
@@ -514,24 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/NewMessage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="53" column="37" lean-forward="false" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/Messages.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -539,6 +511,22 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Message.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrappers/WithError.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -550,11 +538,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/Message.js">
+    <entry file="file://$PROJECT_DIR$/components/NewMessage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        <state relative-caret-position="391">
+          <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
