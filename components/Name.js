@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 
-const Name  = ({ name }) => (<div>
+const Name  = ({ name }) => (<span>
   {name}
-</div>);
+</span>);
 
 Name.props = {
   name: PropTypes.string.isRequired,
-};
-
-Name.defaultProps = {
-  name: "",
 };
 
 export default Name;
