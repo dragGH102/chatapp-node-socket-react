@@ -10,14 +10,16 @@ const Message = ({ message }) => (<div>
   <style jsx>{`
     .message {
       width: 40%;
+      position: absolute;
+      display: block;
     }
 
     .message.mine {
-      float: right;
+      right: 0;
     }
 
     .message.other {
-      float: left;
+      left: 0;
     }
   `
   }</style>

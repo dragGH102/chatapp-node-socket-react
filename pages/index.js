@@ -13,6 +13,13 @@ export default class ChatApp extends React.Component {
         content: 'anything',
         css: null,
         id: new Date().getUTCMilliseconds(),
+      },
+      {
+        // test
+        author: 'other',
+        content: 'anything 2',
+        css: null,
+        id: new Date().getUTCMilliseconds() + 1,
       }],
     }
   }
@@ -26,6 +33,7 @@ export default class ChatApp extends React.Component {
         .messages-container {
           width: 80%;
           list-style-type: none;
+          position: relative;
         }
       `}</style>
     </div>);
