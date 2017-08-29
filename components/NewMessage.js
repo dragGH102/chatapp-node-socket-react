@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import parseMessage from '../lib/parseMessage';
 
 class NewMessage extends React.Component {
   constructor() {
@@ -6,10 +7,12 @@ class NewMessage extends React.Component {
 
     this.state = {
       message: '',
+      error: null,
     };
 
     // provide context to bindings
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -18,17 +21,30 @@ class NewMessage extends React.Component {
     });
   }
 
-  isValidMessage
-
   handleSubmit(e) {
-    const { handleResult } = this.props;
+    e.preventDefault();
+
+    const {handleResult} = this.props;
+
+    const result = parseMessage(this.state.message);
+
+    if (!(result instanceof Error)) {
+      handleResult(result);
+      return;
+    }
+
+    // invalid message
+    this.setState({
+      error: result,
+    });
   }
+
 
   render() {
 
     return (<form
       className="new-message"
-      onSubmit={handleSubmit}
+      onSubmit={this.handleSubmit}
     >
       <input
         value={this.state.message}

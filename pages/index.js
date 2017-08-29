@@ -28,7 +28,8 @@ export default class ChatApp extends React.Component {
     this.handleNewMessage.bind(this);
   }
 
-  handleNewMessage() {
+  handleNewMessage(data) {
+    console.log(data);
     // TODO
   }
 
