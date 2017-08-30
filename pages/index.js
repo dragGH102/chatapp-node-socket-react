@@ -9,31 +9,40 @@ export default class ChatApp extends React.Component {
 
     this.state = {
       name: '(the other player did not set a name yet)',
-      messages: [{
-        // test
-        author: 'me',
-        content: 'anything',
-        css: null,
-        id: new Date().getUTCMilliseconds(),
-      },
-      {
-        // test
-        author: 'other',
-        content: 'anything 2',
-        css: null,
-        id: new Date().getUTCMilliseconds() + 1,
-      }],
+      messages: [],
     };
 
     // provide context to bindings
     this.handleNewMessage.bind(this);
+    this.handleSocketEvent.bind(this);
   }
 
   // connect to WS and listen for events
    componentDidMount() {
        this.socket = io();
-       this.socket.on('connected', () => console.log('the other user connected'));
-       this.socket.on('disconnected', () => console.log('the other user connected'));
+       this.socket.on('connected', this.handleSocketEvent('connected'));
+       this.socket.on('disconnected', this.handleSocketEvent('disconnected'));
+   }
+
+   handleSocketEvent(event, data) {
+      const state = this.state;
+
+      if (event === 'connected') {
+        state.messages.push({
+            id: new Date().getUTCMilliseconds(),
+            content: 'Hey, I\'m ready to chat!',
+            author: 'other',
+        });
+      } else if (event === 'disconnected') {
+          state.messages.push({
+              id: new Date().getUTCMilliseconds(),
+              content: 'Hey, I just left the chat!',
+              author: 'other',
+          });
+      }
+
+      // update state
+       this.setState(state);
    }
 
     // close socket connection
