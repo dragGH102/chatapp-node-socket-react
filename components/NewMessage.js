@@ -53,7 +53,7 @@ class NewMessage extends React.Component {
       onSubmit={this.handleSubmit}
     >
       <input
-        autofocus
+        autoFocus
         value={this.state.message}
         placeholder="Type a new message..."
         onChange={this.handleChange}

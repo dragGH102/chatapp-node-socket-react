@@ -31,6 +31,10 @@ io.on('connection', (socket) => {
            name,
        });
     });
+
+    socket.on('REMOVE_LAST_MESSAGE', () => {
+        socket.broadcast.emit('REMOVE_LAST_MESSAGE');
+    });
 });
 
 nextApp.prepare()

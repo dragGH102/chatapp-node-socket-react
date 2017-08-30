@@ -2,6 +2,7 @@ import io from 'socket.io-client'
 import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
+import _ from 'lodash';
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -59,8 +60,10 @@ export default class ChatApp extends React.Component {
           state.messages.push(newMessage);
       }
       else if (event === 'SET_NAME') {
-          console.log(data);
           state.name = data.name;
+      }
+      else if (event === 'REMOVE_LAST_MESSAGE') {
+        state.messages = state.messages.filter((message) => message.id === _.findLast(state.messages, 'author', 'other').id);
       }
 
       // update state
@@ -84,6 +87,9 @@ export default class ChatApp extends React.Component {
        if (message.type === 'name') {
            this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
        }
+        if (message.type === 'oops') {
+            this.socket.emit('REMOVE_LAST_MESSAGE');
+        }
        else {
            // normal message (eventually with styling)
            let styles = {};
