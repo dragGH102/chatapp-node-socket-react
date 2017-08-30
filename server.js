@@ -24,7 +24,13 @@ io.on('connection', (socket) => {
 
         // send ack to sender
         socket.emit('MESSAGE_SENT', message);
-    })
+    });
+
+    socket.on('SET_NAME', (name) => {
+       socket.broadbast.emit('SET_NAME', {
+           name,
+       });
+    });
 });
 
 nextApp.prepare()

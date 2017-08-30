@@ -10,7 +10,7 @@ export default class ChatApp extends React.Component {
     this.state = {
       name: null,
       messages: [],
-      canSubmit: true,
+      lastMessageSent: true,
     };
   }
 
@@ -23,6 +23,7 @@ export default class ChatApp extends React.Component {
        // other events
        this.socket.on('INCOMING_MESSAGE', (data) => this.handleSocketEvent('INCOMING_MESSAGE', data));
        this.socket.on('MESSAGE_SENT', (data) => this.handleSocketEvent('MESSAGE_SENT', data));
+       this.socket.on('SET_NAME', (data) => this.handleSocketEvent('SET_NAME', data));
    }
 
    handleSocketEvent = (event, data) => {
@@ -44,7 +45,7 @@ export default class ChatApp extends React.Component {
       }
       else if (event === 'MESSAGE_SENT'){
           state.messages.find((message) => message.id === data.id).sending = false;
-          state.canSubmit = true;
+          state.lastMessageSent = true;
       }
       else if (event === 'INCOMING_MESSAGE') {
           const newMessage = {
@@ -55,7 +56,9 @@ export default class ChatApp extends React.Component {
           };
 
           state.messages.push(newMessage);
-          this.setState(state);
+      }
+      else if (event === 'SET_NAME') {
+          state.name = data.name;
       }
 
       // update state
@@ -75,27 +78,29 @@ export default class ChatApp extends React.Component {
     handleNewMessage = (message) => {
        const state = this.state;
 
-       if (message.type) {
-           // command
-           // TODO
-           return;
+       if (message.type === 'name') {
+           this.socket.emit('SET_NAME', {
+               name: message.args.toString(),
+           });
+       }
+        else {
+           // normal message (eventually with styling)
+           const newMessage = {
+               id: new Date().getUTCMilliseconds(),
+               content: message.content,
+               author: 'me',
+               css: message.css,
+               sending: true,
+           };
+
+           state.messages.push(newMessage);
+           state.lastMessageSent = false;
+
+           // notify WS
+           this.socket.emit('INCOMING_MESSAGE', newMessage);
        }
 
-       // normal message (eventually with styling)
-       const newMessage = {
-           id: new Date().getUTCMilliseconds(),
-           content: message.content,
-           author: 'me',
-           css: message.css,
-           sending: true,
-       };
-
-       state.messages.push(newMessage);
-       state.canSubmit = false;
        this.setState(state);
-
-       // notify WS
-       this.socket.emit('INCOMING_MESSAGE', newMessage);
     };
 
     render() {
@@ -107,7 +112,7 @@ export default class ChatApp extends React.Component {
           <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
           <Messages messages={this.state.messages}/>
           <NewMessage
-              canSubmit={this.state.canSubmit}
+              lastMessageSent={this.state.lastMessageSent}
               handleResult={this.handleNewMessage}
           />
           {/* Make styles available to children */}

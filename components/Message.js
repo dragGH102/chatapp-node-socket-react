@@ -1,6 +1,6 @@
 import MessageType from '../types/Message';
 
-const Message = ({ message }) => (<div>
+const Message = ({ message, lastMessageSent }) => (<div>
   <span
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
