@@ -20,8 +20,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('message', (message) => {
+        console.log(message);
         socket.broadcast.emit('incoming message', message);
-        socket.emit('message sent');
+
+        // send ack to sender
+        socket.emit('message sent', message.id);
     })
 });
 

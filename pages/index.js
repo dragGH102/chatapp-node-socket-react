@@ -20,7 +20,7 @@ export default class ChatApp extends React.Component {
        this.socket.on('disconnected', () => this.handleSocketEvent('disconnected'));
 
        // any other event
-       this.socket.on('event', (event, args) => this.handleSocketEvent(event, args));
+       this.socket.on('event', this.handleSocketEvent);
    }
 
    handleSocketEvent = (event, data) => {console.log(event, data);
@@ -38,6 +38,8 @@ export default class ChatApp extends React.Component {
               content: 'Hey, I just left the chat!',
               author: 'other',
           });
+      } else if (event === 'message sent') {
+          // TODO
       }
 
       // update state
@@ -63,14 +65,19 @@ export default class ChatApp extends React.Component {
        }
 
        // normal message (eventually with styling)
-       state.messages.push({
+       const newMessage = {
            id: new Date().getUTCMilliseconds(),
            content: message.content,
            author: 'me',
-       });
+           css: message.css,
+           sending: true,
+       };
+
+       state.messages.push(newMessage);
        this.setState(state);
 
        // notify WS
+       this.socket.emit('message', newMessage);
     };
 
     render() {
