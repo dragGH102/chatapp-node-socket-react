@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 
 const Name  = ({ name }) => (<span>
-  {name}
+  {name || '(the other player did not set a name yet)'}
 </span>);
 
 Name.propTypes = {
   name: PropTypes.string,
-};
-
-Name.defaultProps = {
-  name: '(the other player did not set a name yet)',
 };
 
 export default Name;

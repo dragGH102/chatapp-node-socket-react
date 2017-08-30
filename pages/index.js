@@ -58,6 +58,7 @@ export default class ChatApp extends React.Component {
           state.messages.push(newMessage);
       }
       else if (event === 'SET_NAME') {
+          console.log(data);
           state.name = data.name;
       }
 
@@ -79,9 +80,7 @@ export default class ChatApp extends React.Component {
        const state = this.state;
 
        if (message.type === 'name') {
-           this.socket.emit('SET_NAME', {
-               name: message.args.toString(),
-           });
+           this.socket.emit('SET_NAME', message.args.toString());
        }
         else {
            // normal message (eventually with styling)

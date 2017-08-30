@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('SET_NAME', (name) => {
-       socket.broadbast.emit('SET_NAME', {
+       socket.broadcast.emit('SET_NAME', {
            name,
        });
     });
