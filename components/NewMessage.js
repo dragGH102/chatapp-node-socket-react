@@ -41,6 +41,7 @@ class NewMessage extends React.Component {
 
 
   render() {
+    const { canSubmit } = this.props;
 
     return (<form
       className="new-message"
@@ -51,7 +52,10 @@ class NewMessage extends React.Component {
         placeholder="Type a new message..."
         onChange={this.handleChange}
       />
-      <button type="submit">Send</button>
+      <button
+          disabled={!canSubmit}
+          type="submit"
+      >Send</button>
     </form>);
 
   }
@@ -59,6 +63,7 @@ class NewMessage extends React.Component {
 
 NewMessage.propTypes = {
   handleResult: PropTypes.func.isRequired,
+  canSubmit: PropTypes.bool.isRequired,
 };
 
 export default NewMessage;

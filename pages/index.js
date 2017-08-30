@@ -10,6 +10,7 @@ export default class ChatApp extends React.Component {
     this.state = {
       name: null,
       messages: [],
+      canSubmit: true,
     };
   }
 
@@ -21,9 +22,10 @@ export default class ChatApp extends React.Component {
 
        // other events
        this.socket.on('INCOMING_MESSAGE', (data) => this.handleSocketEvent('INCOMING_MESSAGE', data));
+       this.socket.on('MESSAGE_SENT', (data) => this.handleSocketEvent('MESSAGE_SENT', data));
    }
 
-   handleSocketEvent = (data) => {console.log(data);
+   handleSocketEvent = (event, data) => {
       const state = this.state;
 
       if (event === 'connected') {
@@ -32,13 +34,19 @@ export default class ChatApp extends React.Component {
             content: 'Hey, I\'m ready to chat!',
             author: 'other',
         });
-      } else if (event === 'disconnected') {
+      }
+      else if (event === 'disconnected') {
           state.messages.push({
               id: new Date().getUTCMilliseconds(),
               content: 'Hey, I just left the chat!',
               author: 'other',
           });
-      } else if (event === 'INCOMING_MESSAGE') {
+      }
+      else if (event === 'MESSAGE_SENT'){
+          state.messages.find((message) => message.id === data.id).sending = false;
+          state.canSubmit = true;
+      }
+      else if (event === 'INCOMING_MESSAGE') {
           const newMessage = {
               id: new Date().getUTCMilliseconds(),
               content: data.content,
@@ -83,6 +91,7 @@ export default class ChatApp extends React.Component {
        };
 
        state.messages.push(newMessage);
+       state.canSubmit = false;
        this.setState(state);
 
        // notify WS
@@ -97,7 +106,10 @@ export default class ChatApp extends React.Component {
         >
           <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
           <Messages messages={this.state.messages}/>
-          <NewMessage handleResult={this.handleNewMessage} />
+          <NewMessage
+              canSubmit={this.state.canSubmit}
+              handleResult={this.handleNewMessage}
+          />
           {/* Make styles available to children */}
           <style jsx global>{`
             .messages-container {

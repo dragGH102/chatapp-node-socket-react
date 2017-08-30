@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('INCOMING_MESSAGE', message);
 
         // send ack to sender
-        socket.emit('MESSAGE_SENT', message.id);
+        socket.emit('MESSAGE_SENT', message);
     })
 });
 
