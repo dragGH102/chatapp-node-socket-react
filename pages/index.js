@@ -20,8 +20,9 @@ export default class ChatApp extends React.Component {
   // connect to WS and listen for events
    componentDidMount() {
        this.socket = io();
-       this.socket.on('connected', this.handleSocketEvent('connected'));
-       this.socket.on('disconnected', this.handleSocketEvent('disconnected'));
+       this.socket.on('connected', this.handleSocketEvent);
+       this.socket.on('disconnected', this.handleSocketEvent);
+       this.socket.on('incoming message', this.handleSocketEvent);
    }
 
    handleSocketEvent(event, data) {
@@ -34,6 +35,12 @@ export default class ChatApp extends React.Component {
             author: 'other',
         });
       } else if (event === 'disconnected') {
+          state.messages.push({
+              id: new Date().getUTCMilliseconds(),
+              content: 'Hey, I just left the chat!',
+              author: 'other',
+          });
+      } else if (event === 'incoming message') {
           state.messages.push({
               id: new Date().getUTCMilliseconds(),
               content: 'Hey, I just left the chat!',
@@ -54,52 +61,68 @@ export default class ChatApp extends React.Component {
         this.socket.close();
     }
 
-  handleNewMessage(data) {
-    console.log(data);
-    // TODO
-  }
+    handleNewMessage(message) {
+       const state = this.state;
 
-  render() {
-    return (<div
-      style={{
-        height: '100%',
-      }}
-    >
-      <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
-      <Messages messages={this.state.messages}/>
-      <NewMessage handleResult={this.handleNewMessage} />
-      {/* Make styles available to children */}
-      <style jsx global>{`
-        .messages-container {
-          width: 80%;
-          list-style-type: none;
-          padding-bottom: 50px;
-        }
+       if (message.type) {
+           // command
+           // TODO
+           return;
+       }
 
-        .new-message {
-          position: fixed;
-          border-top: 1px solid #000;
-          bottom: 0;
-          height: 50px;
-          padding-top: 15px;
-          width: 96%;
-          clear: both;
-        }
+       // normal message (eventually with styling)
+       state.messages.push({
+           id: new Date().getUTCMilliseconds(),
+           content: message.content,
+           author: 'me',
+       });
+       this.setState(state);
 
-         .new-message input {
-            display: block;
-            width: 70%;
-            height: 20px;
-            float: left;
-          }
+       // notify WS
 
-          .new-message button {
-            display: block;
-            line-height: 20px;
-            width: 20%;
-            float: right;
-          }
-      `}</style>
-    </div>);
-  }
+    }
+
+    render() {
+        return (<div
+          style={{
+            height: '100%',
+          }}
+        >
+          <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
+          <Messages messages={this.state.messages}/>
+          <NewMessage handleResult={this.handleNewMessage} />
+          {/* Make styles available to children */}
+          <style jsx global>{`
+            .messages-container {
+              width: 80%;
+              list-style-type: none;
+              padding-bottom: 50px;
+            }
+
+            .new-message {
+              position: fixed;
+              border-top: 1px solid #000;
+              bottom: 0;
+              height: 50px;
+              padding-top: 15px;
+              width: 96%;
+              clear: both;
+            }
+
+             .new-message input {
+                display: block;
+                width: 70%;
+                height: 20px;
+                float: left;
+              }
+
+              .new-message button {
+                display: block;
+                line-height: 20px;
+                width: 20%;
+                float: right;
+              }
+          `}</style>
+        </div>);
+    }
 }

@@ -12,16 +12,16 @@ const handle = nextApp.getRequestHandler();
 
 // socket.io
 io.on('connection', (socket) => {
-    // user connected
-    console.log('connected');
-
-    // send to the other clients
+    // send welcome message to the other client
     socket.broadcast.emit('connected');
 
     socket.on('disconnect', () => {
-        console.log('disconnected');
         socket.broadcast.emit('disconnected');
     });
+
+    socket.on('message', (message) => {
+        socket.broadcast.emit('incoming message', message);
+    })
 });
 
 nextApp.prepare()

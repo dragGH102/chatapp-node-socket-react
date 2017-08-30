@@ -5,4 +5,5 @@ export default PropTypes.shape({
   author: PropTypes.string.isRequired, // me | other
   content: PropTypes.string.isRequired,
   css: PropTypes.string,
+  type: PropTypes.string, // <command> | null
 });
