@@ -8,7 +8,7 @@ export default class ChatApp extends React.Component {
     super();
 
     this.state = {
-      name: '(the other player did not set a name yet)',
+      name: null,
       messages: [],
     };
 
@@ -20,12 +20,13 @@ export default class ChatApp extends React.Component {
   // connect to WS and listen for events
    componentDidMount() {
        this.socket = io();
-       this.socket.on('connected', this.handleSocketEvent);
-       this.socket.on('disconnected', this.handleSocketEvent);
-       this.socket.on('incoming message', this.handleSocketEvent);
+       this.socket.on('connected', () => this.handleSocketEvent('connected'));
+       this.socket.on('disconnected', () => this.handleSocketEvent('disconnected'));
+       this.socket.on('event', (event, args) => this.handleSocketEvent(event, args));
    }
 
-   handleSocketEvent(event, data) {
+   handleSocketEvent(event, data) {console.log(event, data);
+
       const state = this.state;
 
       if (event === 'connected') {
@@ -40,16 +41,10 @@ export default class ChatApp extends React.Component {
               content: 'Hey, I just left the chat!',
               author: 'other',
           });
-      } else if (event === 'incoming message') {
-          state.messages.push({
-              id: new Date().getUTCMilliseconds(),
-              content: 'Hey, I just left the chat!',
-              author: 'other',
-          });
       }
 
       // update state
-       this.setState(state);
+      this.setState(state);
    }
 
     // close socket connection
@@ -62,7 +57,10 @@ export default class ChatApp extends React.Component {
     }
 
     handleNewMessage(message) {
-       const state = this.state;
+      this.setState({
+
+      });
+       /*const state = this.state;
 
        if (message.type) {
            // command
@@ -79,7 +77,7 @@ export default class ChatApp extends React.Component {
        this.setState(state);
 
        // notify WS
-
+*/
     }
 
     render() {
