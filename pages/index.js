@@ -26,6 +26,7 @@ export default class ChatApp extends React.Component {
        this.socket.on('SET_NAME', (data) => this.handleSocketEvent('SET_NAME', data));
    }
 
+   // handle incoming socket event
    handleSocketEvent = (event, data) => {
       const state = this.state;
 
@@ -76,13 +77,23 @@ export default class ChatApp extends React.Component {
         this.socket.close();
     }
 
+    // handle message/command to be sent
     handleNewMessage = (message) => {
        const state = this.state;
 
        if (message.type === 'name') {
-           this.socket.emit('SET_NAME', message.args.toString());
+           this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
        }
-        else {
+       else if (message.type === 'think') {
+           const newMessage = {
+               id: new Date().getUTCMilliseconds(),
+               content: message.content,
+               author: 'me',
+               css: 'color: #2f4f4f;',
+               sending: true,
+           };
+       }
+       else {
            // normal message (eventually with styling)
            const newMessage = {
                id: new Date().getUTCMilliseconds(),

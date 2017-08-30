@@ -31,6 +31,12 @@ io.on('connection', (socket) => {
            name,
        });
     });
+
+    socket.on('THINK_MESSAGE', (name) => {
+        socket.broadcast.emit('SET_NAME', {
+            name,
+        });
+    });
 });
 
 nextApp.prepare()

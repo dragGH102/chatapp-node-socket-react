@@ -30,6 +30,11 @@ class NewMessage extends React.Component {
 
     if (!(result instanceof Error)) {
       handleResult(result);
+
+      this.setState({
+          message: '',
+      });
+
       return;
     }
 
@@ -48,6 +53,7 @@ class NewMessage extends React.Component {
       onSubmit={this.handleSubmit}
     >
       <input
+        autofocus
         value={this.state.message}
         placeholder="Type a new message..."
         onChange={this.handleChange}
