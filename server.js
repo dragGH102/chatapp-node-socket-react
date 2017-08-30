@@ -32,8 +32,8 @@ io.on('connection', (socket) => {
        });
     });
 
-    socket.on('REMOVE_LAST_MESSAGE', () => {
-        socket.broadcast.emit('REMOVE_LAST_MESSAGE');
+    socket.on('REMOVE_MESSAGE', (message) => {
+        socket.broadcast.emit('REMOVE_MESSAGE', message);
     });
 });
 

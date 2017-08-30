@@ -62,8 +62,8 @@ export default class ChatApp extends React.Component {
       else if (event === 'SET_NAME') {
           state.name = data.name;
       }
-      else if (event === 'REMOVE_LAST_MESSAGE') {
-        state.messages = state.messages.filter((message) => message.id === _.findLast(state.messages, 'author', 'other').id);
+      else if (event === 'REMOVE_MESSAGE') {
+          state.messages.splice(state.messages.findIndex((message) => message.id === data.id));
       }
 
       // update state
@@ -88,7 +88,7 @@ export default class ChatApp extends React.Component {
            this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
        }
         if (message.type === 'oops') {
-            this.socket.emit('REMOVE_LAST_MESSAGE');
+            this.socket.emit('REMOVE_MESSAGE', _.findLast(state.messages, 'author', 'me').id);
         }
        else {
            // normal message (eventually with styling)
