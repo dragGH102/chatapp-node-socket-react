@@ -19,11 +19,11 @@ export default class ChatApp extends React.Component {
        this.socket.on('connected', () => this.handleSocketEvent('connected'));
        this.socket.on('disconnected', () => this.handleSocketEvent('disconnected'));
 
-       // any other event
-       this.socket.on('event', this.handleSocketEvent);
+       // other events
+       this.socket.on('INCOMING_MESSAGE', (data) => this.handleSocketEvent('INCOMING_MESSAGE', data));
    }
 
-   handleSocketEvent = (event, data) => {console.log(event, data);
+   handleSocketEvent = (data) => {console.log(data);
       const state = this.state;
 
       if (event === 'connected') {
@@ -38,8 +38,16 @@ export default class ChatApp extends React.Component {
               content: 'Hey, I just left the chat!',
               author: 'other',
           });
-      } else if (event === 'message sent') {
-          // TODO
+      } else if (event === 'INCOMING_MESSAGE') {
+          const newMessage = {
+              id: new Date().getUTCMilliseconds(),
+              content: data.content,
+              author: 'other',
+              css: data.css,
+          };
+
+          state.messages.push(newMessage);
+          this.setState(state);
       }
 
       // update state
@@ -49,8 +57,9 @@ export default class ChatApp extends React.Component {
     // close socket connection
     componentWillUnmount() {
         this.socket.off('connected');
-        this.socket.off('discconnected');
-        this.socket.off('event');
+        this.socket.off('disconnected');
+
+        // TODO: add off for other events
 
         this.socket.close();
     }
@@ -77,7 +86,7 @@ export default class ChatApp extends React.Component {
        this.setState(state);
 
        // notify WS
-       this.socket.emit('message', newMessage);
+       this.socket.emit('INCOMING_MESSAGE', newMessage);
     };
 
     render() {

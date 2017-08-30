@@ -19,12 +19,11 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('disconnected');
     });
 
-    socket.on('message', (message) => {
-        console.log(message);
-        socket.broadcast.emit('incoming message', message);
+    socket.on('INCOMING_MESSAGE', (message) => {
+        socket.broadcast.emit('INCOMING_MESSAGE', message);
 
         // send ack to sender
-        socket.emit('message sent', message.id);
+        socket.emit('MESSAGE_SENT', message.id);
     })
 });
 
