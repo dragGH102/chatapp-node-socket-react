@@ -78,28 +78,27 @@ export default class ChatApp extends React.Component {
     }
 
     // handle message/command to be sent
-    handleNewMessage = (message) => {
+    handleNewMessage = (message) => {console.log(message);
        const state = this.state;
 
        if (message.type === 'name') {
            this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
        }
-       else if (message.type === 'think') {
-           const newMessage = {
-               id: new Date().getUTCMilliseconds(),
-               content: message.content,
-               author: 'me',
-               css: 'color: #2f4f4f;',
-               sending: true,
-           };
-       }
        else {
            // normal message (eventually with styling)
+           let styles = {};
+           let content = message.content;
+
+           if (message.type === 'think') {
+               styles.color = '#2f4f4f';
+               content = message.args.toString().replace(',', ' ');
+           }
+
            const newMessage = {
                id: new Date().getUTCMilliseconds(),
-               content: message.content,
+               content: content,
                author: 'me',
-               css: message.css,
+               css: styles,
                sending: true,
            };
 
