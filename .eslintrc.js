@@ -4,6 +4,7 @@ module.exports = {
       "document": true,
       "window": true,
       "process": true,
+      "React": true,
     },
     "rules": {
       "jsx-a11y/href-no-hash": "off",
@@ -13,5 +14,6 @@ module.exports = {
       "import/no-unresolved": 0,
       "react/jsx-filename-extension": 0,
       "linebreak-style": 0,
+      "react/react-in-jsx-scope": 0,
     },
 };

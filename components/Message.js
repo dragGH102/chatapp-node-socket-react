@@ -5,8 +5,8 @@ const Message = ({ message, lastMessageSent }) => (<div>
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
   >
-      {message.content}
-      {message.sending && <span className="sending-label">Sending...</span>}
+    {message.content}
+    {message.sending && <span className="sending-label">Sending...</span>}
   </span>
   <style jsx>{`
     .message {

@@ -24,7 +24,8 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js -p 8000",
     "export": "next export",
-    "lint": "eslint **/*.test.js",
+    "lint": "eslint **/*.js",
+    "lint-fix": "eslint **/*.js --fix",
     "test": "jest"
   }
 }

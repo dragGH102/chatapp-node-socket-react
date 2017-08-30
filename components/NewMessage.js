@@ -24,7 +24,7 @@ class NewMessage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const {handleResult} = this.props;
+    const { handleResult } = this.props;
 
     const result = parseMessage(this.state.message);
 
@@ -32,7 +32,7 @@ class NewMessage extends React.Component {
       handleResult(result);
 
       this.setState({
-          message: '',
+        message: '',
       });
 
       return;
@@ -59,11 +59,10 @@ class NewMessage extends React.Component {
         onChange={this.handleChange}
       />
       <button
-          disabled={!lastMessageSent}
-          type="submit"
+        disabled={!lastMessageSent}
+        type="submit"
       >Send</button>
     </form>);
-
   }
 }
 

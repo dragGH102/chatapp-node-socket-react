@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Name  = ({ name }) => (<span>
+const Name = ({ name }) => (<span>
   {name || '(the other player did not set a name yet)'}
 </span>);
 
