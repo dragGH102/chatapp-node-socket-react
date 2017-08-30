@@ -5,7 +5,7 @@ const Message = ({ message }) => (<div>
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
   >
-    {message.content}
+      {message.content}&nbsp;{!message.sent && <span className="sending-label">'Sending...'</span>};
   </span>
   <style jsx>{`
     .message {
@@ -30,6 +30,9 @@ const Message = ({ message }) => (<div>
       text-align: left;
       background-color: #D3D3D3;
     }
+
+    .sending-label {
+
   `
   }</style>
 </div>);

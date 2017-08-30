@@ -6,4 +6,5 @@ export default PropTypes.shape({
   content: PropTypes.string.isRequired,
   css: PropTypes.string,
   type: PropTypes.string, // <command> | null
+  sent: PropTypes.bool,
 });

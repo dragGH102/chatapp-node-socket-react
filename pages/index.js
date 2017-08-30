@@ -11,10 +11,6 @@ export default class ChatApp extends React.Component {
       name: null,
       messages: [],
     };
-
-    // provide context to bindings
-    this.handleNewMessage.bind(this);
-    this.handleSocketEvent.bind(this);
   }
 
   // connect to WS and listen for events
@@ -22,11 +18,12 @@ export default class ChatApp extends React.Component {
        this.socket = io();
        this.socket.on('connected', () => this.handleSocketEvent('connected'));
        this.socket.on('disconnected', () => this.handleSocketEvent('disconnected'));
+
+       // any other event
        this.socket.on('event', (event, args) => this.handleSocketEvent(event, args));
    }
 
-   handleSocketEvent(event, data) {console.log(event, data);
-
+   handleSocketEvent = (event, data) => {console.log(event, data);
       const state = this.state;
 
       if (event === 'connected') {
@@ -45,22 +42,19 @@ export default class ChatApp extends React.Component {
 
       // update state
       this.setState(state);
-   }
+   };
 
     // close socket connection
-    componentWillUnmount () {
+    componentWillUnmount() {
         this.socket.off('connected');
         this.socket.off('discconnected');
-        // TODO: add remaining events
+        this.socket.off('event');
 
         this.socket.close();
     }
 
-    handleNewMessage(message) {
-      this.setState({
-
-      });
-       /*const state = this.state;
+    handleNewMessage = (message) => {
+       const state = this.state;
 
        if (message.type) {
            // command
@@ -77,8 +71,7 @@ export default class ChatApp extends React.Component {
        this.setState(state);
 
        // notify WS
-*/
-    }
+    };
 
     render() {
         return (<div

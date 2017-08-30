@@ -21,6 +21,7 @@ io.on('connection', (socket) => {
 
     socket.on('message', (message) => {
         socket.broadcast.emit('incoming message', message);
+        socket.emit('message sent');
     })
 });
 

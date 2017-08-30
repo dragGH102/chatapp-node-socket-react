@@ -5,7 +5,7 @@ const Name  = ({ name }) => (<span>
 </span>);
 
 Name.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
 };
 
 Name.defaultProps = {
