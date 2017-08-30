@@ -12,6 +12,7 @@ export default class ChatApp extends React.Component {
       name: null,
       messages: [],
       lastMessageSent: true,
+      lastMessageId: null,
     };
   }
 
@@ -25,6 +26,7 @@ export default class ChatApp extends React.Component {
        this.socket.on('INCOMING_MESSAGE', (data) => this.handleSocketEvent('INCOMING_MESSAGE', data));
        this.socket.on('MESSAGE_SENT', (data) => this.handleSocketEvent('MESSAGE_SENT', data));
        this.socket.on('SET_NAME', (data) => this.handleSocketEvent('SET_NAME', data));
+       this.socket.on('REMOVE_MESSAGE', (data) => this.handleSocketEvent('REMOVE_MESSAGE', data));
    }
 
    // handle incoming socket event
@@ -63,7 +65,8 @@ export default class ChatApp extends React.Component {
           state.name = data.name;
       }
       else if (event === 'REMOVE_MESSAGE') {
-          state.messages.splice(state.messages.findIndex((message) => message.id === data.id));
+          const lastOtherMessageId = state.messages.findIndex((message) => message.id === data.lastMessageId);
+          state.messages.splice(lastOtherMessageId, 1);
       }
 
       // update state
@@ -88,7 +91,9 @@ export default class ChatApp extends React.Component {
            this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
        }
         if (message.type === 'oops') {
-            this.socket.emit('REMOVE_MESSAGE', _.findLast(state.messages, 'author', 'me').id);
+            const lastMessageId = state.messages.findIndex((message) => message.id === state.lastMessageId);
+            state.messages.splice(lastMessageId, 1);
+            this.socket.emit('REMOVE_MESSAGE', lastMessageId);
         }
        else {
            // normal message (eventually with styling)
@@ -100,13 +105,15 @@ export default class ChatApp extends React.Component {
                content = message.args.toString().replace(',', ' ');
            }
 
+           const id = new Date().getUTCMilliseconds();
            const newMessage = {
-               id: new Date().getUTCMilliseconds(),
+               id,
                content: content,
                author: 'me',
                css: styles,
                sending: true,
            };
+           state.lastMessageId = id;
 
            state.messages.push(newMessage);
            state.lastMessageSent = false;

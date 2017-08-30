@@ -32,8 +32,10 @@ io.on('connection', (socket) => {
        });
     });
 
-    socket.on('REMOVE_MESSAGE', (message) => {
-        socket.broadcast.emit('REMOVE_MESSAGE', message);
+    socket.on('REMOVE_MESSAGE', (messageId) => {
+        socket.broadcast.emit('REMOVE_MESSAGE', {
+            messageId,
+        });
     });
 });
 
