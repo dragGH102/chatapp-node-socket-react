@@ -1,3 +1,4 @@
+import io from 'socket.io-client'
 import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
@@ -27,6 +28,22 @@ export default class ChatApp extends React.Component {
     // provide context to bindings
     this.handleNewMessage.bind(this);
   }
+
+  // connect to WS and listen for events
+   componentDidMount() {
+       this.socket = io();
+       this.socket.on('connected', () => console.log('the other user connected'));
+       this.socket.on('disconnected', () => console.log('the other user connected'));
+   }
+
+    // close socket connection
+    componentWillUnmount () {
+        this.socket.off('connected');
+        this.socket.off('discconnected');
+        // TODO: add remaining events
+
+        this.socket.close();
+    }
 
   handleNewMessage(data) {
     console.log(data);
