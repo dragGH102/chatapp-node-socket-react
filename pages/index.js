@@ -12,7 +12,7 @@ export default class ChatApp extends React.Component {
       name: null,
       messages: [],
       lastMessageSent: true,
-      lastMessageId: null,
+      messageIds: [],
     };
   }
 
@@ -31,7 +31,7 @@ export default class ChatApp extends React.Component {
 
    // handle incoming socket event
    handleSocketEvent = (event, data) => {
-      const state = this.state;
+      const state = _.cloneDeep(this.state);
 
       if (event === 'connected') {
         state.messages.push({
@@ -65,8 +65,9 @@ export default class ChatApp extends React.Component {
           state.name = data.name;
       }
       else if (event === 'REMOVE_MESSAGE') {
-          const lastOtherMessageId = state.messages.findIndex((message) => message.id === data.lastMessageId);
-          state.messages.splice(lastOtherMessageId, 1);
+          // TODO: fix (messages not removed in right order on the receiver of /oops command)
+          console.log(data.messageId, state.messages)
+          state.messages.splice(state.messages.findIndex((message) => message.id === data.messageId), 1);
       }
 
       // update state
@@ -85,15 +86,20 @@ export default class ChatApp extends React.Component {
 
     // handle message/command to be sent
     handleNewMessage = (message) => {console.log(message);
-       const state = this.state;
+       const state = _.cloneDeep(this.state);
 
        if (message.type === 'name') {
            this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
        }
         if (message.type === 'oops') {
-            const lastMessageId = state.messages.findIndex((message) => message.id === state.lastMessageId);
-            state.messages.splice(lastMessageId, 1);
-            this.socket.emit('REMOVE_MESSAGE', lastMessageId);
+            const lastMessageId = state.messageIds[state.messageIds.length - 1];
+
+            if (lastMessageId) {
+                state.messages.splice(state.messages.findIndex((message) => message.id === lastMessageId), 1);
+                this.socket.emit('REMOVE_MESSAGE', lastMessageId);
+                state.messageIds.pop();
+            }
+
         }
        else {
            // normal message (eventually with styling)
@@ -113,7 +119,7 @@ export default class ChatApp extends React.Component {
                css: styles,
                sending: true,
            };
-           state.lastMessageId = id;
+           state.messageIds.push(id);
 
            state.messages.push(newMessage);
            state.lastMessageSent = false;

@@ -33,6 +33,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('REMOVE_MESSAGE', (messageId) => {
+        console.log(messageId);
         socket.broadcast.emit('REMOVE_MESSAGE', {
             messageId,
         });
