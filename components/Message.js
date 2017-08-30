@@ -16,6 +16,7 @@ const Message = ({ message }) => (<div>
       height: 1.5em;
       font-size: 1em;
       padding: 2px 10px;
+      margin-top: 10px;
     }
 
     .message.mine {
