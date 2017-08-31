@@ -1,9 +1,9 @@
-import random from "./random";
+import randomUtils from "./random";
 
 export default {
     generateMessage(author) {
         return {
-            id: new Date().getUTCMilliseconds() + random.randomNumberWithingRange(1, 1000),
+            id: new Date().getUTCMilliseconds() + randomUtils.randomNumberWithingRange(1, 1000),
             content: 'anything',
             author,
             css: {},
