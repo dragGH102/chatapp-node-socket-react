@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import MessageType from '../types/Message';
 
-const Message = ({ message, lastMessageSent }) => (<div>
+const Message = ({ message, lastMessageSent, className }) => (<div className={className}>
   <span
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
@@ -44,6 +45,7 @@ const Message = ({ message, lastMessageSent }) => (<div>
 </div>);
 
 Message.propTypes = {
+  className: PropTypes.string,
   message: MessageType.isRequired,
 };
 

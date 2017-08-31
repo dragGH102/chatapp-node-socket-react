@@ -3,7 +3,7 @@ import WithError from '../wrappers/WithError';
 import Message from '../components/Message';
 import MessageType from '../types/Message';
 
-const Messages = ({ messages }) => (<ul className="messages-container">
+const Messages = ({ messages, className }) => (<ul className={`messages-container ${className}`}>
   {messages.map(message => (<li key={message.id}>
     <WithError>
       <Message message={message} />
@@ -12,6 +12,7 @@ const Messages = ({ messages }) => (<ul className="messages-container">
 </ul>);
 
 Messages.propTypes = {
+  className: PropTypes.string,
   messages: PropTypes.arrayOf(MessageType).isRequired,
 };
 

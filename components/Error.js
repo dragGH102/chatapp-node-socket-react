@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Error = ({ error }) => (<div className="error">
+const Error = ({ error, className }) => (<div className={`error ${className}`}>
     {error}
     <style jsx>{`
     .error {
@@ -10,7 +10,9 @@ const Error = ({ error }) => (<div className="error">
 </div>);
 
 Error.propTypes = {
+    className: PropTypes.string,
     error: PropTypes.string.isRequired,
 };
 
 export default Error;
+

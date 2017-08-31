@@ -37,10 +37,10 @@ class NewMessage extends React.Component {
 
 
   render() {
-    const { lastMessageSent } = this.props;
+    const { lastMessageSent, className } = this.props;
 
     return (<form
-      className="new-message"
+      className={`new-message ${className}`}
       onSubmit={this.handleSubmit}
     >
       <input
@@ -58,6 +58,7 @@ class NewMessage extends React.Component {
 }
 
 NewMessage.propTypes = {
+  className: PropTypes.string,
   handleResult: PropTypes.func.isRequired,
   lastMessageSent: PropTypes.bool.isRequired,
 };
