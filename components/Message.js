@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import MessageType from '../types/Message';
 
-const Message = ({ message, lastMessageSent, className }) => (<div className={className}>
+const Message = ({ message, lastMessageSent, className }) => (<div className={`slide-in-right ${className}`}>
   <span
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
@@ -11,7 +11,7 @@ const Message = ({ message, lastMessageSent, className }) => (<div className={cl
   </span>
   <style jsx>{`
     .message {
-    display: inline-block;
+      display: inline-block;
       width: 40%;
       clear: both;
       border: 1px solid #000;
@@ -20,6 +20,22 @@ const Message = ({ message, lastMessageSent, className }) => (<div className={cl
       font-size: 1em;
       padding: 2px 10px;
       margin-top: 10px;
+    }
+
+    .slide-in-right {
+      animation-name: slideInRight;
+      animation-duration: 1s;
+      animation-fill-mode: none;
+    }
+
+    @keyframes slideInRight {
+        0% {
+          transform: translateX(${className.indexOf('mine') !== -1 ? '100%' : '0'});
+          visibility: visible;
+        }
+        100% {
+          transform: translateX(${className.indexOf('mine') !== -1 ? '0' : '100%'});
+        }
     }
 
     .message.mine {
@@ -39,9 +55,7 @@ const Message = ({ message, lastMessageSent, className }) => (<div className={cl
       margin-left: 10px;
       display: inline-block;
     }
-
-  `
-  }</style>
+  `}</style>
 </div>);
 
 Message.propTypes = {

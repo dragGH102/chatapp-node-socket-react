@@ -78,7 +78,6 @@ export default class ChatApp extends React.Component {
     componentWillUnmount() {
         this.socket.off('connected');
         this.socket.off('disconnected');
-
         // TODO: add off for other events
 
         this.socket.close();
@@ -97,8 +96,7 @@ export default class ChatApp extends React.Component {
        // no error -> handle message
        state.submitError = null;
 
-       if (message.type === 'name') {
-           // TODO: ! change from "name" to "nick"
+       if (message.type === 'nick') {
            this.socket.emit('SET_NAME', message.args.join(' '));
        }
         if (message.type === 'oops') {
