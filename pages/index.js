@@ -3,7 +3,7 @@ import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
 import WithError from "../wrappers/WithError";
-import {socketEventToStateChange} from "../lib/parseSocketEvent";
+import {socketEventToStateChange} from "../lib/socketEventToStateChange";
 import {handleMessageUtility} from "../lib/handleMessageUtility";
 
 export let initialState = {
