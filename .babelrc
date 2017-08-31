@@ -12,5 +12,13 @@
         "next/babel"
       ]
     }
-  }
+  },
+  "plugins": [
+    [
+      "wrap-in-js",
+      {
+        "extensions": ["css$", "scss$"]
+      }
+    ]
+  ],
 }

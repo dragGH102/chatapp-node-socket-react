@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 
-const Error = ({ error, className }) => (<div className={`error ${className}`}>
+import stylesheet from './css/Error.scss'
+
+const Error = ({ error, className }) => (<div className={className}>
+    <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
     {error}
-    <style jsx>{`
-    .error {
-      color: #f00;
-    }
-    `}</style>
 </div>);
 
 Error.propTypes = {
