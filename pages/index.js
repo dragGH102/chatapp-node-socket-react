@@ -3,6 +3,7 @@ import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
 import _ from 'lodash';
+import WithError from "../wrappers/WithError";
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -13,6 +14,7 @@ export default class ChatApp extends React.Component {
       messages: [],
       lastMessageSent: true,
       messageIds: [],
+      submitError: false,
     };
   }
 
@@ -65,10 +67,6 @@ export default class ChatApp extends React.Component {
           state.name = data.name;
       }
       else if (event === 'REMOVE_MESSAGE') {
-          // TODO: fix (messages not removed in right order on the receiver of /oops command)
-          // console.log(data.messageId, JSON.stringify(state.messages))
-          console.log(JSON.stringify(state.messages), data.messageId, state.messages.find((message) => message.id === data.messageId), state.messages.findIndex((message) => message.id === data.messageId))
-
           state.messages.splice(state.messages.findIndex((message) => message.id === data.messageId), 1);
       }
 
@@ -90,13 +88,17 @@ export default class ChatApp extends React.Component {
     handleNewMessage = (message) => {
        const state = _.cloneDeep(this.state);
 
+       if (message instanceof Error) {
+           state.submitError = true;
+           return;
+       }
+
        if (message.type === 'name') {
            // TODO: ! change from "name" to "nick"
            this.socket.emit('SET_NAME', message.args.join(' '));
        }
         if (message.type === 'oops') {
             const lastMessageId = state.messageIds[state.messageIds.length - 1];
-            console.log(lastMessageId);
             if (lastMessageId) {
                 state.messages.splice(state.messages.findIndex((message) => message.id === lastMessageId), 1);
                 this.socket.emit('REMOVE_MESSAGE', lastMessageId);
@@ -135,17 +137,21 @@ export default class ChatApp extends React.Component {
     };
 
     render() {
+        const { messages, lastMessageSent, submitError } = this.state;
+
         return (<div
           style={{
             height: '100%',
           }}
         >
           <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
-          <Messages messages={this.state.messages}/>
-          <NewMessage
-              lastMessageSent={this.state.lastMessageSent}
-              handleResult={this.handleNewMessage}
-          />
+          <Messages messages={messages}/>
+          <WithError error={submitError}>
+              <NewMessage
+                  lastMessageSent={lastMessageSent}
+                  handleResult={this.handleNewMessage}
+              />
+          </WithError>
           {/* Make styles available to children */}
           <style jsx global>{`
             .messages-container {

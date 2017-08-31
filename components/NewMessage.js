@@ -7,7 +7,6 @@ class NewMessage extends React.Component {
 
     this.state = {
       message: '',
-      error: null,
     };
 
     // provide context to bindings
@@ -28,20 +27,12 @@ class NewMessage extends React.Component {
 
     const result = parseMessage(this.state.message);
 
-    if (!(result instanceof Error)) {
-      handleResult(result);
-
-      this.setState({
-        message: '',
-      });
-
-      return;
-    }
-
-    // invalid message
     this.setState({
-      error: result,
+        message: '',
     });
+
+    // pass on to the parent
+    handleResult(result);
   }
 
 
