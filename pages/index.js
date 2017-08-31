@@ -5,6 +5,7 @@ import NewMessage from '../components/NewMessage';
 import _ from 'lodash';
 import WithError from "../wrappers/WithError";
 import Scroll from 'react-scroll';
+import {socketEventToStateChange} from "../lib/parseSocketEvent";
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -34,45 +35,10 @@ export default class ChatApp extends React.Component {
 
    // handle incoming socket event
    handleSocketEvent = (event, data) => {
-      const state = _.cloneDeep(this.state);
-
-      if (event === 'connected') {
-        state.messages.push({
-            id: new Date().getUTCMilliseconds(),
-            content: 'Hey, I\'m ready to chat!',
-            author: 'other',
-        });
-      }
-      else if (event === 'disconnected') {
-          state.messages.push({
-              id: new Date().getUTCMilliseconds(),
-              content: 'Hey, I just left the chat!',
-              author: 'other',
-          });
-      }
-      else if (event === 'MESSAGE_SENT'){
-          state.messages.find((message) => message.id === data.id).sending = false;
-          state.lastMessageSent = true;
-      }
-      else if (event === 'INCOMING_MESSAGE') {
-          const newMessage = {
-              id: data.id,
-              content: data.content,
-              author: 'other',
-              css: data.css,
-          };
-
-          state.messages.push(newMessage);
-      }
-      else if (event === 'SET_NAME') {
-          state.name = data.name;
-      }
-      else if (event === 'REMOVE_MESSAGE') {
-          state.messages.splice(state.messages.findIndex((message) => message.id === data.messageId), 1);
-      }
+      const newState = socketEventToStateChange(this.state, event, data);
 
       // update state
-      this.setState(state);
+      this.setState(newState);
    };
 
     // close socket connection
