@@ -88,8 +88,8 @@ export default class ChatApp extends React.Component {
     handleNewMessage = (message) => {
        const state = _.cloneDeep(this.state);
 
-       if (message instanceof Error) {
-           state.submitError = message.message;
+       if (message.type instanceof Error) {
+           state.submitError = message.type.message;
            this.setState(state);
            return;
        }
