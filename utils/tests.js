@@ -1,6 +1,6 @@
 import randomUtils from "./random";
 
-export default {
+module.exports = {
     generateMessage(author) {
         return {
             id: new Date().getUTCMilliseconds() + randomUtils.randomNumberWithingRange(1, 1000),
