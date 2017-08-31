@@ -8,8 +8,6 @@ describe('<WithError />', () => {
         const component = mount(<WithError error="any error">
             <div />
         </WithError>);
-        console.log(component.debug());
-
-        console.log(component.find(<Error error="any error" />));
+        expect(component.find(Error)).toHaveLength(1);
     });
 });
