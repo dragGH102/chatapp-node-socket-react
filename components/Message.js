@@ -30,11 +30,11 @@ const Message = ({ message, lastMessageSent, className }) => (<div className={`s
 
     @keyframes slideInRight {
         0% {
-          transform: translateX(${className.indexOf('mine') !== -1 ? '100%' : '0'});
+          transform: translateX(100%);
           visibility: visible;
         }
         100% {
-          transform: translateX(${className.indexOf('mine') !== -1 ? '0' : '100%'});
+          transform: translateX(0%);
         }
     }
 

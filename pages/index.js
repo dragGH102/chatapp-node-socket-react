@@ -4,6 +4,7 @@ import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
 import _ from 'lodash';
 import WithError from "../wrappers/WithError";
+import Scroll from 'react-scroll';
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -135,6 +136,7 @@ export default class ChatApp extends React.Component {
            this.socket.emit('INCOMING_MESSAGE', newMessage);
        }
 
+       Scroll.animateScroll.scrollToBottom();
        this.setState(state);
     };
 
