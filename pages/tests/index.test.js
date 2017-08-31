@@ -1,7 +1,11 @@
+import { mount } from 'enzyme';
+import ChatApp from "../index";
+
 describe('<ChatApp />', () => {
     describe('handleNewMessage', () => {
-        it('should set submitError, if error', () => {
-            // TODO
+        // class' property tested via DOM interaction simulation and state check
+        it('submitError should have been set if error', () => {
+            const wrapper = mount(<ChatApp />);
         });
 
         it('if command = oops, should remove corresponding message', () => {
