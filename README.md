@@ -8,3 +8,4 @@ Technologies used:
 - next.js
 - react
 
+BEM conventions for CSS styling

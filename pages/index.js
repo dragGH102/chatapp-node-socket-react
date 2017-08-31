@@ -150,7 +150,10 @@ export default class ChatApp extends React.Component {
         >
           <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
           <Messages messages={messages}/>
-          <WithError error={submitError}>
+          <WithError
+              error={submitError}
+              className="new-message__container"
+          >
               <NewMessage
                   lastMessageSent={lastMessageSent}
                   handleResult={this.handleNewMessage}
@@ -164,9 +167,10 @@ export default class ChatApp extends React.Component {
               padding-bottom: 50px;
             }
 
-            .new-message-container {
+            .new-message__container {
               position: fixed;
               bottom: 0;
+              width: 100%;
             }
 
             .new-message {
