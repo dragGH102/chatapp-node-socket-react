@@ -148,7 +148,12 @@ export default class ChatApp extends React.Component {
             height: '100%',
           }}
         >
-          <h3>Welcome to the chat. You are chatting with <Name name={this.state.name} /></h3>
+          <div style={{
+              height: '50px',
+            }}
+          >
+            <h3>You are chatting with <Name name={this.state.name} /></h3>
+          </div>
           <Messages messages={messages}/>
           <WithError
               error={submitError}
@@ -164,17 +169,18 @@ export default class ChatApp extends React.Component {
             .messages-container {
               width: 80%;
               list-style-type: none;
-              padding-bottom: 50px;
             }
 
             .new-message__container {
-              position: fixed;
-              bottom: 0;
-              width: 100%;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 999;
+                background-color: #123456;
+                padding: 10px;
             }
 
             .new-message {
-              border-top: 1px solid #000;
               height: 50px;
               padding-top: 15px;
               width: 96%;
