@@ -33,6 +33,7 @@ export default class ChatApp extends React.Component {
        this.socket.on('MESSAGE_SENT', (data) => this.handleSocketEvent('MESSAGE_SENT', data));
        this.socket.on('SET_NAME', (data) => this.handleSocketEvent('SET_NAME', data));
        this.socket.on('REMOVE_MESSAGE', (data) => this.handleSocketEvent('REMOVE_MESSAGE', data));
+       this.socket.on('COUNTDOWN', (data) => this.handleSocketEvent('COUNTDOWN', data));
    }
 
    // handle incoming socket event
