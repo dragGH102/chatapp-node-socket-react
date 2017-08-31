@@ -14,7 +14,7 @@ export default class ChatApp extends React.Component {
       messages: [],
       lastMessageSent: true,
       messageIds: [],
-      submitError: false,
+      submitError: null,
     };
   }
 
@@ -89,9 +89,13 @@ export default class ChatApp extends React.Component {
        const state = _.cloneDeep(this.state);
 
        if (message instanceof Error) {
-           state.submitError = true;
+           state.submitError = message.message;
+           this.setState(state);
            return;
        }
+
+       // no error -> handle message
+       state.submitError = null;
 
        if (message.type === 'name') {
            // TODO: ! change from "name" to "nick"
@@ -160,10 +164,13 @@ export default class ChatApp extends React.Component {
               padding-bottom: 50px;
             }
 
-            .new-message {
+            .new-message-container {
               position: fixed;
-              border-top: 1px solid #000;
               bottom: 0;
+            }
+
+            .new-message {
+              border-top: 1px solid #000;
               height: 50px;
               padding-top: 15px;
               width: 96%;
