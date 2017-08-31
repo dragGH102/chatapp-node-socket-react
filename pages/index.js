@@ -53,7 +53,7 @@ export default class ChatApp extends React.Component {
       }
       else if (event === 'INCOMING_MESSAGE') {
           const newMessage = {
-              id: new Date().getUTCMilliseconds(),
+              id: data.id,
               content: data.content,
               author: 'other',
               css: data.css,
@@ -66,7 +66,9 @@ export default class ChatApp extends React.Component {
       }
       else if (event === 'REMOVE_MESSAGE') {
           // TODO: fix (messages not removed in right order on the receiver of /oops command)
-          console.log(data.messageId, state.messages)
+          // console.log(data.messageId, JSON.stringify(state.messages))
+          console.log(JSON.stringify(state.messages), data.messageId, state.messages.find((message) => message.id === data.messageId), state.messages.findIndex((message) => message.id === data.messageId))
+
           state.messages.splice(state.messages.findIndex((message) => message.id === data.messageId), 1);
       }
 
@@ -85,15 +87,16 @@ export default class ChatApp extends React.Component {
     }
 
     // handle message/command to be sent
-    handleNewMessage = (message) => {console.log(message);
+    handleNewMessage = (message) => {
        const state = _.cloneDeep(this.state);
 
        if (message.type === 'name') {
-           this.socket.emit('SET_NAME', message.args.toString().replace(',', ' '));
+           // TODO: ! change from "name" to "nick"
+           this.socket.emit('SET_NAME', message.args.join(' '));
        }
         if (message.type === 'oops') {
             const lastMessageId = state.messageIds[state.messageIds.length - 1];
-
+            console.log(lastMessageId);
             if (lastMessageId) {
                 state.messages.splice(state.messages.findIndex((message) => message.id === lastMessageId), 1);
                 this.socket.emit('REMOVE_MESSAGE', lastMessageId);
@@ -108,7 +111,7 @@ export default class ChatApp extends React.Component {
 
            if (message.type === 'think') {
                styles.color = '#2f4f4f';
-               content = message.args.toString().replace(',', ' ');
+               content = message.args.join(' ');
            }
 
            const id = new Date().getUTCMilliseconds();

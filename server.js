@@ -10,7 +10,7 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 
-// socket.io
+// socket.io WS
 io.on('connection', (socket) => {
     // send welcome message to the other client
     socket.broadcast.emit('connected');
@@ -33,7 +33,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('REMOVE_MESSAGE', (messageId) => {
-        console.log(messageId);
         socket.broadcast.emit('REMOVE_MESSAGE', {
             messageId,
         });
