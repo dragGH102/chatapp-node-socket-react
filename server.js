@@ -37,6 +37,12 @@ io.on('connection', (socket) => {
             messageId,
         });
     });
+
+    socket.on('COUNTDOWN', (args) => {
+        socket.broadcast.emit('COUNTDOWN', {
+            args,
+        });
+    });
 });
 
 nextApp.prepare()

@@ -12,6 +12,7 @@ export let initialState = {
     lastMessageSent: true,
     messageIds: [],
     submitError: null,
+    countdown: 0,
 };
 
 export default class ChatApp extends React.Component {
@@ -37,6 +38,8 @@ export default class ChatApp extends React.Component {
    // handle incoming socket event
    handleSocketEvent = (event, data) => {
       const newState = socketEventToStateChange(this.state, event, data);
+
+      if (newState.countdown !== 0)
 
       // update state
       this.setState(newState);
