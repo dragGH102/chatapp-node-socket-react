@@ -7,7 +7,7 @@ import testUtils from "../../utils/tests";
 describe('<Message />', () => {
     it('should render correctly"', () => {
         const message = testUtils.generateMessage('me');
-        
+
         const component = renderer.create(<Message message={message} />);
         const tree = component.toJSON();
         expect(tree).toMatchSnapshot();
