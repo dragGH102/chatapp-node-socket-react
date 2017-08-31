@@ -6,17 +6,19 @@ import WithError from "../wrappers/WithError";
 import {socketEventToStateChange} from "../lib/parseSocketEvent";
 import {handleMessageUtility} from "../lib/handleMessageUtility";
 
+export let initialState = {
+    name: null,
+    messages: [],
+    lastMessageSent: true,
+    messageIds: [],
+    submitError: null,
+};
+
 export default class ChatApp extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      name: null,
-      messages: [],
-      lastMessageSent: true,
-      messageIds: [],
-      submitError: null,
-    };
+    this.state = initialState;
   }
 
   // connect to WS and listen for events
