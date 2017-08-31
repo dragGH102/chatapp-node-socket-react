@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Message /> should render correctly" 1`] = `
+<div
+  className="slide-in-right undefined"
+  data-jsx={586277062}
+>
+  <span
+    className="message mine"
+    data-jsx={586277062}
+    style={Object {}}
+  >
+    anything
+  </span>
+</div>
+`;
