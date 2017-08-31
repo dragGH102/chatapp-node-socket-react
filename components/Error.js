@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types';
 
-import stylesheet from './css/Error.scss'
+// removed as it breaks Jest tests and in general styled-jsx is enough
+// import stylesheet from './css/Error.scss'
 
-const Error = ({ error, className }) => (<div className={className}>
-    <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+const Error = ({ error, className }) => (<div className={`error ${className}`}>
+    {/* <style dangerouslySetInnerHTML={{ __html: stylesheet }} /> */}
+
+    <style jsx>{`
+    .error {
+        color: #f00;
+    }
+  `}</style>
     {error}
 </div>);
 
