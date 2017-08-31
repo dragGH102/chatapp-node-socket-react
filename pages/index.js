@@ -2,10 +2,9 @@ import io from 'socket.io-client'
 import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
-import _ from 'lodash';
 import WithError from "../wrappers/WithError";
-import Scroll from 'react-scroll';
 import {socketEventToStateChange} from "../lib/parseSocketEvent";
+import {handleMessageUtility} from "../lib/handleMessageUtility";
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -52,58 +51,8 @@ export default class ChatApp extends React.Component {
 
     // handle message/command to be sent
     handleNewMessage = (message) => {
-       const state = _.cloneDeep(this.state);
-
-       if (message.type instanceof Error) {
-           state.submitError = message.type.message;
-           this.setState(state);
-           return;
-       }
-
-       // no error -> handle message
-       state.submitError = null;
-
-       if (message.type === 'nick') {
-           this.socket.emit('SET_NAME', message.args.join(' '));
-       }
-        if (message.type === 'oops') {
-            const lastMessageId = state.messageIds[state.messageIds.length - 1];
-            if (lastMessageId) {
-                state.messages.splice(state.messages.findIndex((message) => message.id === lastMessageId), 1);
-                this.socket.emit('REMOVE_MESSAGE', lastMessageId);
-                state.messageIds.pop();
-            }
-
-        }
-       else {
-           // normal message (eventually with styling)
-           let styles = {};
-           let content = message.content;
-
-           if (message.type === 'think') {
-               styles.color = '#2f4f4f';
-               content = message.args.join(' ');
-           }
-
-           const id = new Date().getUTCMilliseconds();
-           const newMessage = {
-               id,
-               content: content,
-               author: 'me',
-               css: styles,
-               sending: true,
-           };
-           state.messageIds.push(id);
-
-           state.messages.push(newMessage);
-           state.lastMessageSent = false;
-
-           // notify WS
-           this.socket.emit('INCOMING_MESSAGE', newMessage);
-       }
-
-       Scroll.animateScroll.scrollToBottom();
-       this.setState(state);
+       const newState = handleMessageUtility(this.state, message, this.socket);
+       this.setState(newState);
     };
 
     render() {
