@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import parseMessage from '../lib/parseMessage';
 
 class NewMessage extends React.Component {
@@ -34,9 +33,7 @@ class NewMessage extends React.Component {
 
   handleKeyUp = () => {
     const { handleTypingMessage } = this.props;
-    const delay = 300;
-    console.log('try debouncing');
-    _.debounce(handleTypingMessage, delay);
+    handleTypingMessage();
   };
 
 

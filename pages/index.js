@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import _ from 'lodash';
 import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
@@ -82,8 +83,9 @@ export default class ChatApp extends React.Component {
 
     // emit event to WS to inform user is typing
     handleTypingMessage = () => {
-        console.log('called');
-        this.socket.emit('TYPING');
+        const delay = 300;
+        // Creates a throttled function that only invokes func at most once per every wait milliseconds.
+        _.throttle(() => this.socket.emit('TYPING'), delay);
     };
 
     render() {
