@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 // import stylesheet from './css/Error.scss'
 
 const Error = ({ error, className }) => (<div className={`error ${className}`}>
-    {/* <style dangerouslySetInnerHTML={{ __html: stylesheet }} /> */}
+  {/* <style dangerouslySetInnerHTML={{ __html: stylesheet }} /> */}
 
-    <style jsx>{`
+  <style jsx>{`
     .error {
         color: #f00;
     }
   `}</style>
-    {error}
+  {error}
 </div>);
 
 Error.propTypes = {
-    className: PropTypes.string,
-    error: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  error: PropTypes.string.isRequired,
 };
 
 export default Error;

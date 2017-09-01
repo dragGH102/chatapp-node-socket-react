@@ -1,28 +1,28 @@
 import PropTypes from 'prop-types';
-import MessageType from '../types/Message';
 import processString from 'react-process-string';
-import Emoticon from "./Emoticon";
+import MessageType from '../types/Message';
+import Emoticon from './Emoticon';
 
-const parseEmoticons = (message) => {
-    let config = [{
-        regex: /\(smile\)/gim,
-        fn: (key, result) => <Emoticon key={key} name="smile-o" />
-    },
+const parseEmoticons = message => {
+  const config = [{
+    regex: /\(smile\)/gim,
+    fn: key => <Emoticon key={key} name="smile-o" />,
+  },
     // wink icon not yet supported by FontAwesome
     // --> can be replaced by https://icomoon.io/#icons-icomoon in future
-    {
-        regex: /(\(frown\))/gim,
-        fn: (key, result) => <Emoticon key={key} name="frown-o" />
-    }];
-    return processString(config)(message);
+  {
+    regex: /(\(frown\))/gim,
+    fn: key => <Emoticon key={key} name="frown-o" />,
+  }];
+  return processString(config)(message);
 };
 
-const Message = ({ message, lastMessageSent, className }) => (<div className={`slide-in-right ${className}`}>
+const Message = ({ message, className }) => (<div className={`slide-in-right ${className}`}>
   <span
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
   >
-      {parseEmoticons(message.content)}
+    {parseEmoticons(message.content)}
     {message.sending && <span className="sending-label">Sending...</span>}
   </span>
   <style jsx>{`

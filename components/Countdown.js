@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Countdown = ({ time, className }) => (<div className={`countdown ${className}`}>
-    <style jsx>{`
+  <style jsx>{`
     .countdown {
         color: #fff;
     }
@@ -9,9 +9,9 @@ const Countdown = ({ time, className }) => (<div className={`countdown ${classNa
     Redirecting in {time} ...
 </div>);
 
-Countdown.propTYpes = {
-    className: PropTypes.string,
-    time: PropTypes.number.isRequired,
+Countdown.propTypes = {
+  className: PropTypes.string,
+  time: PropTypes.number.isRequired,
 };
 
 export default Countdown;
