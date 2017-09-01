@@ -13,16 +13,16 @@ A Slack-style chat app built on top of ...
 
 Tested on **Chrome 60 (Linux Debian 8)** (Node v.7.10)
 
-## Quirks:
-- Server-side rendering by default (thanks to Next.js!)
-- BEM conventions for CSS styling
-- custom webpack config (allows importing css as modules). See example @ `components/Error`
+## Quirks (stuff useful in real-world cases!):
+- **Server-side rendering** by default (thanks to Next.js!)
+- **BEM conventions** for CSS styling
+- **custom webpack config** (allows importing css as modules). See example @ `components/Error`
 - chat messages and command validation
 - shows when the other user typing
 - prevent chatting when app is offline
-- Various types of unit tests written in **Jest**: snapshot, state change (isolate tests - lots of headaches taken out, same result), mocks, wrapper (HOC)
+- Various types of unit **tests** written in Jest: snapshot, state change (isolate tests - lots of headaches taken out, same result), mocks, wrapper (HOC)
 - In general can work with 3+ clients, but some features (e.g. change name) won't as the server is not keeping track of the clients connected
-- auto-scroll to bottom
+- **auto-scroll** to bottom
 - messages are animated!
 
 ## CLI Commands:
