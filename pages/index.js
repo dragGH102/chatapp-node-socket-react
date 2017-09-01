@@ -44,7 +44,7 @@ export default class ChatApp extends React.Component {
 
        // special functions
        // Creates a throttled function that only invokes func at most once per every wait milliseconds.
-       this.throttled = _.throttle(() => this.socket.emit('TYPING'), 300);
+       this.throttled = _.throttle(() => this.socket.emit('TYPING'), 250);
    }
 
    // handle incoming socket event
@@ -72,7 +72,7 @@ export default class ChatApp extends React.Component {
                this.setState({
                    isTyping: false,
                });
-           });
+           }, 500);
        }
 
       // update state
