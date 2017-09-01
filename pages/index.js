@@ -174,7 +174,13 @@ export default class ChatApp extends React.Component {
     componentWillUnmount() {
         this.socket.off('connected');
         this.socket.off('disconnected');
-        // TODO: add off for other events
+
+        this.socket.off('INCOMING_MESSAGE');
+        this.socket.off('MESSAGE_SENT');
+        this.socket.off('SET_NAME');
+        this.socket.off('REMOVE_MESSAGE');
+        this.socket.off('COUNTDOWN');
+        this.socket.off('TYPING');
 
         this.socket.close();
     }
