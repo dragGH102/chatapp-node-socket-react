@@ -5,7 +5,7 @@ A Slack-style chat app built on top of ...
 - socket.io
 - next.js
 - react
-- eslint
+- eslint (airbnb style guide)
 - jest
 - babel
 - font awesome
@@ -25,17 +25,10 @@ Tested on **Chrome 60 (Linux Debian 8)** (Node v.7.10)
 - auto-scroll to bottom
 - messages are animated!
 
-## CHAT commands:
-(open 2 windows to chat!)
-
-- `<message>`: send a normal message. You can also includes emoticons by typing `(smile)` and / or `(frown)`. Prefix with `/highlight` to obtain 10% biffer font and background 10% darker. Prefix with `/think` to have the message appear in dark gray.
-- `/nick` <name>: show your new name on the other chat
-- `/oops` : remove last messages (both chats)
-- `/fadelast`: show last message sent with 10% visibility (sender chat only)
-- `/countdown <seconds> <valid url>`: to open a window with `<valid url>` after X `<seconds> on the other user's chat
-
 ## CLI Commands:
 (here I use `yarn` but `npm` should work too)
+
+First install the **dependencies** ..: simply run `yarn` (or `npm install`)
 
 - yarn run `dev`: run app in `dev` environment. Runs @ `localhost:3000`
 - yarn run `build`: build app to run in a `node server` (output: `out/`)
@@ -45,3 +38,11 @@ Tested on **Chrome 60 (Linux Debian 8)** (Node v.7.10)
 - yarn run `lint`: to run eslint
 - yarn run `lint-fix`: to fix eventual linting errors (relies on eslint capability of doing it!)
 
+## CHAT commands:
+(open 2 windows to chat!)
+
+- `<message>`: send a normal message. You can also includes emoticons by typing `(smile)` and / or `(frown)`. Prefix with `/highlight` to obtain 10% biffer font and background 10% darker. Prefix with `/think` to have the message appear in dark gray.
+- `/nick` <name>: show your new name on the other chat
+- `/oops` : remove last messages (both chats)
+- `/fadelast`: show last message sent with 10% visibility (sender chat only)
+- `/countdown <seconds> <valid url>`: to open a window with `<valid url>` after X `<seconds> on the other user's chat
