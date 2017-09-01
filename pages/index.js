@@ -6,6 +6,7 @@ import WithError from "../wrappers/WithError";
 import {socketEventToStateChange} from "../lib/socketEventToStateChange";
 import {handleMessageUtility} from "../lib/handleMessageUtility";
 import Countdown from "../components/Countdown";
+import Typing from "../components/Typing";
 
 export let initialState = {
     name: null,
@@ -14,11 +15,11 @@ export let initialState = {
     messageIds: [],
     submitError: null,
     countdown: 0,
-    typing: false,
+    isTyping: false,
 };
 
 let timeoutInterval = null;
-let 
+let typingTimeout = null;
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -60,8 +61,13 @@ export default class ChatApp extends React.Component {
       }
 
       // handle typing UI logic
-       if (newState.typing) {
-
+       if (newState.isTyping) {
+           clearTimeout(typingTimeout);
+           typingTimeout = setTimeout(() => {
+               this.setState({
+                   isTyping: false,
+               });
+           });
        }
 
       // update state
@@ -79,7 +85,7 @@ export default class ChatApp extends React.Component {
     };
 
     render() {
-        const { messages, lastMessageSent, submitError, countdown } = this.state;
+        const { messages, lastMessageSent, submitError, countdown, isTyping } = this.state;
 
         return (<div
           style={{
@@ -102,7 +108,10 @@ export default class ChatApp extends React.Component {
                   handleResult={this.handleNewMessage}
                   handleTypingMessage={this.handleTypingMessage}
               />
-              {countdown > 0 && <Countdown time={countdown} />}
+              <div className="state-messages">
+                {countdown > 0 && <Countdown time={countdown} className="countdown__container" />}
+                {isTyping && <Typing className="typing__container" />}
+              </div>
           </WithError>
           {/* Make styles available to children */}
           <style jsx global>{`
@@ -139,6 +148,14 @@ export default class ChatApp extends React.Component {
                 display: block;
                 line-height: 20px;
                 width: 20%;
+                float: right;
+              }
+
+              .countdown__container {
+                float: left;
+              . }
+
+              .typing__container {
                 float: right;
               }
           `}</style>
