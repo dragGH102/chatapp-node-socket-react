@@ -4,8 +4,8 @@ import Name from '../components/Name';
 import Messages from '../components/Messages';
 import NewMessage from '../components/NewMessage';
 import WithError from '../wrappers/WithError';
-import { socketEventToStateChange } from '../lib/socketEventToStateChange';
-import { handleMessageUtility } from '../lib/handleMessageUtility';
+import socketEventToStateChange from '../lib/socketEventToStateChange';
+import handleMessageUtility from '../lib/handleMessageUtility';
 import Countdown from '../components/Countdown';
 import Typing from '../components/Typing';
 
@@ -128,12 +128,7 @@ export default class ChatApp extends React.Component {
           height: '100%',
         }}
       >
-        <div style={{
-          height: '50px',
-        }}
-        >
-          <h3>You are chatting with <Name name={this.state.name} /></h3>
-        </div>
+        <h3>You are chatting with <Name name={this.state.name} /></h3>
         <Messages messages={messages} />
         <WithError
           error={error}
@@ -189,14 +184,12 @@ export default class ChatApp extends React.Component {
 
             .state-messages .countdown {
                 float: left;
+                color: #fff;
             }
 
             .state-messages .typing {
                 float: right;
                 margin-right: 50px;
-            }
-
-            .countdown {
                 color: #fff;
             }
           `}</style>

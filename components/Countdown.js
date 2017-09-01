@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Countdown = ({ time, className }) => (<div className={className}>
+const Countdown = ({ time, className }) => (<div className={`countdown ${className}`}>
     Redirecting in {time} ...
 </div>);
 
