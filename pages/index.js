@@ -18,7 +18,6 @@ export let initialState = {
     countdown: 0,
     isTyping: false,
     isConnected: false,
-    isOnline: false,
 };
 
 let timeoutInterval = null;
@@ -101,14 +100,11 @@ export default class ChatApp extends React.Component {
 
     render() {
         const { messages, lastMessageSent, submitError, countdown,
-            isTyping, isOnline, isConnected,
+            isTyping, isConnected,
         } = this.state;
 
         let error = submitError;
-        if (!error && isOnline === false) {
-            error = 'the other user is not online';
-        }
-        if (!error && isConnected === false) {
+        if (isConnected === false) {
             error = 'server connection down';
         }
 
