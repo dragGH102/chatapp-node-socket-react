@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import parseMessage from '../lib/parseMessage';
 
 class NewMessage extends React.Component {
@@ -8,19 +9,15 @@ class NewMessage extends React.Component {
     this.state = {
       message: '',
     };
-
-    // provide context to bindings
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({
       message: e.target.value,
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const { handleResult } = this.props;
@@ -33,7 +30,14 @@ class NewMessage extends React.Component {
 
     // pass on to the parent
     handleResult(result);
-  }
+  };
+
+  handleKeyUp = () => {
+    const { handleTypingMessage } = this.props;
+    const delay = 300;
+
+    _.debounce(handleTypingMessage, delay);
+  };
 
 
   render() {
@@ -48,6 +52,7 @@ class NewMessage extends React.Component {
         value={this.state.message}
         placeholder="Type a new message..."
         onChange={this.handleChange}
+        onKeyUp={this.handleKeyUp}
       />
       <button
         disabled={!lastMessageSent}
@@ -60,6 +65,7 @@ class NewMessage extends React.Component {
 NewMessage.propTypes = {
   className: PropTypes.string,
   handleResult: PropTypes.func.isRequired,
+  handleTypingMessage: PropTypes.func.isRequired,
   lastMessageSent: PropTypes.bool.isRequired,
 };
 

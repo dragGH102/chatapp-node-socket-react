@@ -14,9 +14,11 @@ export let initialState = {
     messageIds: [],
     submitError: null,
     countdown: 0,
+    typing: false,
 };
 
 let timeoutInterval = null;
+let 
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -57,23 +59,23 @@ export default class ChatApp extends React.Component {
         }, 1000);
       }
 
+      // handle typing UI logic
+       if (newState.typing) {
+
+       }
+
       // update state
       this.setState(newState);
    };
-
-    // close socket connection
-    componentWillUnmount() {
-        this.socket.off('connected');
-        this.socket.off('disconnected');
-        // TODO: add off for other events
-
-        this.socket.close();
-    }
 
     // handle message/command to be sent
     handleNewMessage = (message) => {
        const newState = handleMessageUtility(this.state, message, this.socket);
        this.setState(newState);
+    };
+
+    handleTypingMessage = () => {
+        this.socket.emit('TYPING');
     };
 
     render() {
@@ -98,6 +100,7 @@ export default class ChatApp extends React.Component {
               <NewMessage
                   lastMessageSent={lastMessageSent}
                   handleResult={this.handleNewMessage}
+                  handleTypingMessage={this.handleTypingMessage}
               />
               {countdown > 0 && <Countdown time={countdown} />}
           </WithError>
@@ -140,5 +143,14 @@ export default class ChatApp extends React.Component {
               }
           `}</style>
         </div>);
+    }
+
+    // close socket connection
+    componentWillUnmount() {
+        this.socket.off('connected');
+        this.socket.off('disconnected');
+        // TODO: add off for other events
+
+        this.socket.close();
     }
 }

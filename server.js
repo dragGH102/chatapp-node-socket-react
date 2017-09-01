@@ -43,6 +43,11 @@ io.on('connection', (socket) => {
             args,
         });
     });
+
+    socket.on('TYPING', () => {
+        console.log('typing');
+        socket.broadcast.emit('TYPING');
+    });
 });
 
 nextApp.prepare()
