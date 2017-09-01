@@ -2,6 +2,12 @@ const path = require('path')
 const glob = require('glob')
 
 module.exports = {
+    // routes to export (static export)
+    exportPathMap() {
+        return {
+            '/': { page: '/' },
+        };
+    },
     // webpack custom config to import stylesheet within components
     // The strategy here is to transpile the stylesheet file to a css-in-js file
     // so that it can be loaded and hot reloaded both on the server and the client..
