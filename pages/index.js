@@ -17,6 +17,8 @@ export let initialState = {
     submitError: null,
     countdown: 0,
     isTyping: false,
+    isConnected: false,
+    isOnline: false,
 };
 
 let timeoutInterval = null;
@@ -92,7 +94,17 @@ export default class ChatApp extends React.Component {
     };
 
     render() {
-        const { messages, lastMessageSent, submitError, countdown, isTyping } = this.state;
+        const { messages, lastMessageSent, submitError, countdown,
+            isTyping, isOnline, isConnected,
+        } = this.state;
+
+        let error = submitError;
+        if (!error && isOnline === false) {
+            error = 'the other user is not online';
+        }
+        if (!error && isConnected === false) {
+            error = 'server connection down';
+        }
 
         return (<div
           style={{
@@ -107,11 +119,11 @@ export default class ChatApp extends React.Component {
           </div>
           <Messages messages={messages}/>
           <WithError
-              error={submitError}
+              error={error}
               className="new-message-container"
           >
               <NewMessage
-                  lastMessageSent={lastMessageSent}
+                  canSubmit={lastMessageSent}
                   handleResult={this.handleNewMessage}
                   handleTypingMessage={this.handleTypingMessage}
               />
