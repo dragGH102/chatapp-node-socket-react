@@ -148,6 +148,11 @@ export default class ChatApp extends React.Component {
         </WithError>
         <style jsx global>{`
             // Make styles available to children
+
+            body {
+              overflow-x: hidden;
+            }
+
             .messages-container {
               width: 80%;
               list-style-type: none;
