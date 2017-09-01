@@ -1,8 +1,17 @@
 import PropTypes from 'prop-types';
 import MessageType from '../types/Message';
+import processString from 'react-process-string';
+import Emoticon from "./Emoticon";
 
 const parseEmoticons = (message) => {
-  
+    let config = [{
+        regex: /\(smile\)/gim,
+        fn: (key, result) => <Emoticon key={key} name="smile-o" />
+    }, {
+        regex: /(\(wink\))/gim,
+        fn: (key, result) => <Emoticon key={key} name="wink" />
+    }];
+    return processString(config)(message);
 };
 
 const Message = ({ message, lastMessageSent, className }) => (<div className={`slide-in-right ${className}`}>
@@ -10,7 +19,7 @@ const Message = ({ message, lastMessageSent, className }) => (<div className={`s
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
     style={message.css}
   >
-    {message.content}
+      {parseEmoticons(message.content)}
     {message.sending && <span className="sending-label">Sending...</span>}
   </span>
   <style jsx>{`

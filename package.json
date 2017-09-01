@@ -20,6 +20,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-fontawesome": "^1.6.1",
+    "react-process-string": "^1.2.0",
     "react-scroll": "^1.5.4",
     "react-test-renderer": "^15.6.1",
     "sass-loader": "^6.0.6",
