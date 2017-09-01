@@ -7,9 +7,12 @@ const parseEmoticons = (message) => {
     let config = [{
         regex: /\(smile\)/gim,
         fn: (key, result) => <Emoticon key={key} name="smile-o" />
-    }, {
-        regex: /(\(wink\))/gim,
-        fn: (key, result) => <Emoticon key={key} name="wink" />
+    },
+    // wink icon not yet supported by FontAwesome
+    // - can be replaced by https://icomoon.io/#icons-icomoon in future
+    {
+        regex: /(\(frown\))/gim,
+        fn: (key, result) => <Emoticon key={key} name="frown-o" />
     }];
     return processString(config)(message);
 };
