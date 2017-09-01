@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-const Name = ({ name, className }) => (<span className={className}>
+const Name = ({ name, className }) => (<span className={`name ${className}`}>
   <style jsx global>{`
-      position: fixed;
-      margin-right: 20px;
-      bottom: 0;
-      color: #0000cc;
+   .name {
+      color: #fff;
+      font-weight: 800;
+    }
   `}</style>
   {name || '(the other player did not set a name yet)'}
 </span>);

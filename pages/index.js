@@ -128,12 +128,14 @@ export default class ChatApp extends React.Component {
           height: '100%',
         }}
       >
-        <h3>You are chatting with <Name name={this.state.name} /></h3>
         <Messages messages={messages} />
         <WithError
           error={error}
           className="new-message-container"
         >
+          <div className="name-container">
+            You are chatting with <Name name={this.state.name} />
+          </div>
           <NewMessage
             canSubmit={lastMessageSent}
             handleResult={this.handleNewMessage}
@@ -144,12 +146,12 @@ export default class ChatApp extends React.Component {
             {isTyping && <Typing className="typing" />}
           </div>
         </WithError>
-        {/* Make styles available to children */}
         <style jsx global>{`
+            // Make styles available to children
             .messages-container {
               width: 80%;
               list-style-type: none;
-              margin-top: 3em;
+              margin-top: 5em;
             }
 
             .new-message-container {
@@ -191,6 +193,10 @@ export default class ChatApp extends React.Component {
                 float: right;
                 margin-right: 50px;
                 color: #fff;
+            }
+
+            .name-container {
+              color: #fff;
             }
           `}</style>
       </div>);
