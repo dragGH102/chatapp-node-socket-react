@@ -5,6 +5,7 @@ import NewMessage from '../components/NewMessage';
 import WithError from "../wrappers/WithError";
 import {socketEventToStateChange} from "../lib/socketEventToStateChange";
 import {handleMessageUtility} from "../lib/handleMessageUtility";
+import Countdown from "../components/Countdown";
 
 export let initialState = {
     name: null,
@@ -14,6 +15,8 @@ export let initialState = {
     submitError: null,
     countdown: 0,
 };
+
+let timeoutInterval = null;
 
 export default class ChatApp extends React.Component {
   constructor() {
@@ -40,7 +43,19 @@ export default class ChatApp extends React.Component {
    handleSocketEvent = (event, data) => {
       const newState = socketEventToStateChange(this.state, event, data);
 
-      if (newState.countdown !== 0)
+      // handle countdown UI logic
+      if (newState.countdown !== 0) {
+          timeoutInterval = setInterval(() => {
+              const countdown = this.state.countdown - 1;
+              this.setState({
+                  countdown,
+              });
+
+              if (countdown === 0) {
+                  clearInterval(timeoutInterval);
+              }
+        }, 1000);
+      }
 
       // update state
       this.setState(newState);
@@ -62,7 +77,7 @@ export default class ChatApp extends React.Component {
     };
 
     render() {
-        const { messages, lastMessageSent, submitError } = this.state;
+        const { messages, lastMessageSent, submitError, countdown } = this.state;
 
         return (<div
           style={{
@@ -84,12 +99,14 @@ export default class ChatApp extends React.Component {
                   lastMessageSent={lastMessageSent}
                   handleResult={this.handleNewMessage}
               />
+              {countdown > 0 && <Countdown time={countdown} />}
           </WithError>
           {/* Make styles available to children */}
           <style jsx global>{`
             .messages-container {
               width: 80%;
               list-style-type: none;
+              margin-top: 3em;
             }
 
             .new-message__container {
