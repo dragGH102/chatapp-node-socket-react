@@ -11,6 +11,7 @@ const Typing = ({ time, className }) => (<div className={`typing ${className}`}>
 
 Typing.propTYpes = {
     className: PropTypes.string,
+    time: PropTypes.number.isRequired,
 };
 
 export default Typing;

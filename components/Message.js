@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import MessageType from '../types/Message';
 
+const parseEmoticons = (message) => {
+  
+};
+
 const Message = ({ message, lastMessageSent, className }) => (<div className={`slide-in-right ${className}`}>
   <span
     className={`message ${message.author === 'me' ? 'mine' : 'other'}`}
