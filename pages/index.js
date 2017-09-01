@@ -55,42 +55,56 @@ export default class ChatApp extends React.Component {
     this.throttled = _.throttle(() => this.socket.emit('TYPING'), 250);
   }
 
-   // handle incoming socket event
-   handleSocketEvent = (event, data) => {
-     console.log(event);
-     const newState = socketEventToStateChange(this.state, event, data);
+  // close socket connection
+  componentWillUnmount() {
+    this.socket.off('connected');
+    this.socket.off('disconnected');
 
-     // handle countdown UI logic
-     if (newState.countdown !== 0) {
-       timeoutInterval = setInterval(() => {
-         const countdown = this.state.countdown - 1;
-         this.setState({
-           countdown,
-         });
+    this.socket.off('INCOMING_MESSAGE');
+    this.socket.off('MESSAGE_SENT');
+    this.socket.off('SET_NAME');
+    this.socket.off('REMOVE_MESSAGE');
+    this.socket.off('COUNTDOWN');
+    this.socket.off('TYPING');
 
-         if (countdown === 0) {
-           clearInterval(timeoutInterval);
-         }
-       }, 1000);
-     }
-
-     // handle typing UI logic
-     if (newState.isTyping) {
-       clearTimeout(typingTimeout);
-       typingTimeout = setTimeout(() => {
-         this.setState({
-           isTyping: false,
-         });
-       }, 500);
-     }
-
-     // update state
-     this.setState(newState);
-   };
+    this.socket.close();
+  }
 
     // handle message/command to be sent
     handleNewMessage = (message) => {
       const newState = handleMessageUtility(this.state, message, this.socket);
+      this.setState(newState);
+    };
+
+    // handle incoming socket event
+    handleSocketEvent = (event, data) => {
+      const newState = socketEventToStateChange(this.state, event, data);
+
+      // handle countdown UI logic
+      if (newState.countdown !== 0) {
+        timeoutInterval = setInterval(() => {
+          const countdown = this.state.countdown - 1;
+          this.setState({
+            countdown,
+          });
+
+          if (countdown === 0) {
+            clearInterval(timeoutInterval);
+          }
+        }, 1000);
+      }
+
+      // handle typing UI logic
+      if (newState.isTyping) {
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+          this.setState({
+            isTyping: false,
+          });
+        }, 500);
+      }
+
+      // update state
       this.setState(newState);
     };
 
@@ -187,20 +201,5 @@ export default class ChatApp extends React.Component {
             }
           `}</style>
       </div>);
-    }
-
-    // close socket connection
-    componentWillUnmount() {
-      this.socket.off('connected');
-      this.socket.off('disconnected');
-
-      this.socket.off('INCOMING_MESSAGE');
-      this.socket.off('MESSAGE_SENT');
-      this.socket.off('SET_NAME');
-      this.socket.off('REMOVE_MESSAGE');
-      this.socket.off('COUNTDOWN');
-      this.socket.off('TYPING');
-
-      this.socket.close();
     }
 }
