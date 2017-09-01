@@ -20,7 +20,7 @@ Tested on **Chrome 60 (Linux Debian 8)** (Node v.7.10)
 - chat messages and command validation
 - shows when the other user typing
 - prevent chatting when app is offline
-- Various types of tests written in **Jest**: snapshot, state change (isolate tests - lots of headaches taken out, same result), mocks, wrapper (HOC)
+- Various types of unit tests written in **Jest**: snapshot, state change (isolate tests - lots of headaches taken out, same result), mocks, wrapper (HOC)
 - In general can work with 3+ clients, but some features (e.g. change name) won't as the server is not keeping track of the clients connected
 - auto-scroll to bottom
 - messages are animated!
@@ -28,7 +28,7 @@ Tested on **Chrome 60 (Linux Debian 8)** (Node v.7.10)
 ## CHAT commands:
 (open 2 windows to chat!)
 
-- <message>: send a normal message. You can also includes emoticons by typing `(smile)` and / or `(frown)`. Prefix with `/highlight` to obtain 10% biffer font and background 10% darker. Prefix with `/think` to have the message appear in dark gray.
+- `<message>`: send a normal message. You can also includes emoticons by typing `(smile)` and / or `(frown)`. Prefix with `/highlight` to obtain 10% biffer font and background 10% darker. Prefix with `/think` to have the message appear in dark gray.
 - `/nick` <name>: show your new name on the other chat
 - `/oops` : remove last messages (both chats)
 - `/fadelast`: show last message sent with 10% visibility (sender chat only)
