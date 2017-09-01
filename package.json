@@ -29,6 +29,7 @@
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",

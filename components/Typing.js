@@ -4,7 +4,7 @@ const Typing = ({ className }) => (<div className={className}>
     The other user is typing...
 </div>);
 
-Typing.propTYpes = {
+Typing.propTypes = {
   className: PropTypes.string,
 };
 

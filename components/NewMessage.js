@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import parseMessage from '../lib/parseMessage';
 
+// for the sake of normal use ...
+/* eslint-disable jsx-a11y/no-autofocus */
+
 class NewMessage extends React.Component {
   constructor() {
     super();
@@ -10,14 +13,14 @@ class NewMessage extends React.Component {
     };
   }
 
-    /* eslint-disable-next-line */
-  handleChange = e => {
+  /* eslint-disable-next-line */
+  handleChange = (e) => {
     this.setState({
       message: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const { handleResult } = this.props;
@@ -25,7 +28,7 @@ class NewMessage extends React.Component {
     const result = parseMessage(this.state.message);
 
     this.setState({
-        message: '',
+      message: '',
     });
 
     // pass on to the parent
