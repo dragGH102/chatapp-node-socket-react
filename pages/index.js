@@ -34,8 +34,14 @@ export default class ChatApp extends React.Component {
   // connect to WS and listen for events
    componentDidMount() {
        this.socket = io();
+
+       // custom events (other user)
        this.socket.on('connected', () => this.handleSocketEvent('connected'));
        this.socket.on('disconnected', () => this.handleSocketEvent('disconnected'));
+
+       // socket events: dis(connect) for my user
+       this.socket.on('connect', () =>  this.handleSocketEvent('connect'));
+       this.socket.on('disconnect', () =>  this.handleSocketEvent('disconnect'));
 
        // other events
        this.socket.on('INCOMING_MESSAGE', (data) => this.handleSocketEvent('INCOMING_MESSAGE', data));
@@ -51,7 +57,7 @@ export default class ChatApp extends React.Component {
    }
 
    // handle incoming socket event
-   handleSocketEvent = (event, data) => {
+   handleSocketEvent = (event, data) => {console.log(event);
       const newState = socketEventToStateChange(this.state, event, data);
 
       // handle countdown UI logic
