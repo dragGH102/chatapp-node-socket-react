@@ -60,4 +60,5 @@ typings/
 # other
 eslint
 .next/
+out/
 .idea/
