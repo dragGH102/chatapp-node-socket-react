@@ -35,7 +35,7 @@ class NewMessage extends React.Component {
   handleKeyUp = () => {
     const { handleTypingMessage } = this.props;
     const delay = 300;
-
+    console.log('try debouncing');
     _.debounce(handleTypingMessage, delay);
   };
 

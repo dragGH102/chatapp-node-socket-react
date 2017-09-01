@@ -80,7 +80,9 @@ export default class ChatApp extends React.Component {
        this.setState(newState);
     };
 
+    // emit event to WS to inform user is typing
     handleTypingMessage = () => {
+        console.log('called');
         this.socket.emit('TYPING');
     };
 
@@ -101,7 +103,7 @@ export default class ChatApp extends React.Component {
           <Messages messages={messages}/>
           <WithError
               error={submitError}
-              className="new-message__container"
+              className="new-message-container"
           >
               <NewMessage
                   lastMessageSent={lastMessageSent}
@@ -109,8 +111,8 @@ export default class ChatApp extends React.Component {
                   handleTypingMessage={this.handleTypingMessage}
               />
               <div className="state-messages">
-                {countdown > 0 && <Countdown time={countdown} className="countdown__container" />}
-                {isTyping && <Typing className="typing__container" />}
+                {countdown > 0 && <Countdown time={countdown} className="countdown" />}
+                {isTyping && <Typing className="typing" />}
               </div>
           </WithError>
           {/* Make styles available to children */}
@@ -121,7 +123,7 @@ export default class ChatApp extends React.Component {
               margin-top: 3em;
             }
 
-            .new-message__container {
+            .new-message-container {
                 position: fixed;
                 top: 0;
                 width: 100%;
@@ -135,28 +137,29 @@ export default class ChatApp extends React.Component {
               padding-top: 15px;
               width: 96%;
               clear: both;
-            }
+             }
 
              .new-message input {
                 display: block;
                 width: 70%;
                 height: 20px;
                 float: left;
-              }
+             }
 
-              .new-message button {
+             .new-message button {
                 display: block;
                 line-height: 20px;
                 width: 20%;
                 float: right;
+             }
+
+              .state-messages .countdown {
+                float: left;
               }
 
-              .countdown__container {
-                float: left;
-              . }
-
-              .typing__container {
+              .state-messages .typing {
                 float: right;
+                margin-right: 50px;
               }
           `}</style>
         </div>);
