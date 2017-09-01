@@ -7,10 +7,11 @@ A Slack-style chat app built on top of ...
 - react
 - eslint
 - jest
+- babel
 - font awesome
 - and a bunch of others libraries...
 
-Tested on **Chrome 60 (Linux Debian 8)**
+Tested on **Chrome 60 (Linux Debian 8)** (Node v.7.10)
 
 ## Quirks:
 - Server-side rendering by default (thanks to Next.js!)
