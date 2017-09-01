@@ -10,6 +10,7 @@ class NewMessage extends React.Component {
     };
   }
 
+    /* eslint-disable-next-line */
   handleChange = e => {
     this.setState({
       message: e.target.value,

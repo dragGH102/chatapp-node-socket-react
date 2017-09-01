@@ -3,7 +3,7 @@ import processString from 'react-process-string';
 import MessageType from '../types/Message';
 import Emoticon from './Emoticon';
 
-const parseEmoticons = message => {
+const parseEmoticons = (message) => {
   const config = [{
     regex: /\(smile\)/gim,
     fn: key => <Emoticon key={key} name="smile-o" />,

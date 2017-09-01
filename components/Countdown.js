@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Countdown = ({ time, className }) => (<div className={`countdown ${className}`}>
-  <style jsx>{`
-    .countdown {
-        color: #fff;
-    }
-  `}</style>
+const Countdown = ({ time, className }) => (<div className={className}>
     Redirecting in {time} ...
 </div>);
 

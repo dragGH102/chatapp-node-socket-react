@@ -172,14 +172,18 @@ export default class ChatApp extends React.Component {
                 float: right;
              }
 
-              .state-messages .countdown {
+            .state-messages .countdown {
                 float: left;
-              }
+            }
 
-              .state-messages .typing {
+            .state-messages .typing {
                 float: right;
                 margin-right: 50px;
-              }
+            }
+
+            .countdown {
+                color: #fff;
+            }
           `}</style>
         </div>);
     }
