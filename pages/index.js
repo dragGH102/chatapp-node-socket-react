@@ -41,6 +41,10 @@ export default class ChatApp extends React.Component {
        this.socket.on('SET_NAME', (data) => this.handleSocketEvent('SET_NAME', data));
        this.socket.on('REMOVE_MESSAGE', (data) => this.handleSocketEvent('REMOVE_MESSAGE', data));
        this.socket.on('COUNTDOWN', (data) => this.handleSocketEvent('COUNTDOWN', data));
+
+       // special functions
+       // Creates a throttled function that only invokes func at most once per every wait milliseconds.
+       this.throttled = _.throttle(() => this.socket.emit('TYPING'), 300);
    }
 
    // handle incoming socket event
@@ -83,9 +87,7 @@ export default class ChatApp extends React.Component {
 
     // emit event to WS to inform user is typing
     handleTypingMessage = () => {
-        const delay = 300;
-        // Creates a throttled function that only invokes func at most once per every wait milliseconds.
-        _.throttle(() => this.socket.emit('TYPING'), delay);
+        this.throttled();
     };
 
     render() {

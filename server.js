@@ -9,7 +9,6 @@ const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
-
 // socket.io WS
 io.on('connection', (socket) => {
     // send welcome message to the other client
@@ -45,7 +44,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('TYPING', () => {
-        console.log('typing');
         socket.broadcast.emit('TYPING');
     });
 });
