@@ -23,7 +23,7 @@ class NewMessage extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { handleResult } = this.props;
+    const { handleResult, canSubmit } = this.props;
 
     const result = parseMessage(this.state.message);
 
@@ -32,7 +32,9 @@ class NewMessage extends React.Component {
     });
 
     // pass on to the parent
-    handleResult(result);
+    if (canSubmit) {
+      handleResult(result);
+    }
   };
 
   handleKeyUp = () => {

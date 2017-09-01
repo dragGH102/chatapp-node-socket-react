@@ -156,7 +156,7 @@ export default class ChatApp extends React.Component {
             .messages-container {
               width: 80%;
               list-style-type: none;
-              margin-top: 5em;
+              margin-top: 7em;
             }
 
             .new-message-container {

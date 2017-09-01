@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Countdown = ({ time, className }) => (<div className={`countdown ${className}`}>
-    Redirecting in {time} ...
+    Opening link in {time} ...
 </div>);
 
 Countdown.propTypes = {
